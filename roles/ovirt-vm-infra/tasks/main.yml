@@ -1,0 +1,99 @@
+---
+- block:
+  - name: Login to oVirt
+    ovirt_auth:
+      url: "{{ engine_url }}"
+      username: "{{ engine_user }}"
+      password: "{{ engine_password }}"
+      ca_file: "{{ engine_cafile | default(omit) }}"
+      insecure: "{{ engine_insecure | default(true) }}"
+    when: ovirt_auth is undefined
+    register: loggedin
+    tags:
+      - always
+
+  - name: Create VMs
+    no_log: "{{ not debug_vm_create }}"
+    ovirt_vms:
+      auth: "{{ ovirt_auth }}"
+      cluster: "{{ item.profile.cluster }}"
+      template: "{{ item.profile.template }}"
+      name: "{{ item.name }}"
+      memory: "{{ item.profile.memory }}"
+      cpu_cores: "{{ item.profile.cores }}"
+      cloud_init:
+        host_name: "{{ item.name }}.{{ item.profile.domain | default(omit) }}"
+        authorized_ssh_keys: "{{ item.profile.ssh_key | default('') }}"
+        user_name: root
+        root_password: "{{ item.profile.root_password | default(omit) }}"
+      cloud_init_nics: "{{ item.profile.nics | default([]) }}"
+    with_items:
+      - "{{ vms }}"
+    async: 800
+    poll: 0
+    register: all_vms
+    tags:
+      - ovirt-vm-infra
+  
+  - name: Wait for VMs to be added
+    async_status: "jid={{ item.ansible_job_id }}"
+    register: job_result
+    with_items:
+      - "{{ all_vms.results }}"
+    until: job_result.finished
+    retries: 40
+    delay: 20
+    tags:
+      - ovirt-vm-infra
+  
+  - name: Create VMs disks
+    ovirt_disks:
+      auth: "{{ ovirt_auth }}"
+      name: "{{ item.0.name }}_{{ item.1.name }}"
+      vm_name: "{{ item.0.name }}"
+      size: "{{ item.1.size }}"
+      format: "{{ item.1.format | default('cow') }}"
+      interface: "{{ item.1.interface | default(omit) }}"
+      storage_domain: "{{ item.1.storage_domain | default(omit) }}"
+    with_subelements:
+      - "{{ vms }}"
+      - profile.disks
+    tags:
+      - ovirt-vm-infra
+  
+  - name: Tag VMs
+    ovirt_tags:
+      auth: "{{ ovirt_auth }}"
+      name: "{{ item }}"
+      vms: "{{ vms|json_query(query)|map(attribute='name') | list }}"
+    with_items:
+      - "{{ vms | map(attribute='tag') | list | unique }}"
+    vars:
+      query: "[?tag=='{{ item }}']"
+    tags:
+      - ovirt-vm-infra
+  
+  - name: Wait for VMs IP
+    ovirt_vms_facts:
+      auth: "{{ ovirt_auth }}"
+      pattern: "name={{ item.name }}"
+      fetch_nested: true
+      nested_attributes: ips
+    with_items:
+      - "{{ vms }}"
+    until: ovirt_vms | map(attribute='reported_devices') | list | first | length > 0
+    retries: 5
+    delay: 5
+    when: "{{ wait_for_ip }}"
+    tags:
+      - wait_for_ip
+      - ovirt-vm-infra
+
+  always:
+    - name: Logout from oVirt
+      ovirt_auth:
+        state: absent
+        ovirt_auth: "{{ ovirt_auth }}"
+      when: not loggedin.skipped | default(false)
+      tags:
+        - always

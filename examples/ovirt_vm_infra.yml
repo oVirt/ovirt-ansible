@@ -1,0 +1,54 @@
+---
+- name: oVirt infra
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    # Contains encrypted `engine_password` varibale using ansible-vault
+    - passwords.yml
+
+  vars:
+    engine_url: https://ovirt-engine.example.com/ovirt-engine/api
+    engine_user: admin@internal
+    engine_cafile: /etc/pki/ovirt-engine/ca.pem
+
+    httpd_vm:
+      cluster: production
+      domain: example.com
+      template: rhel7
+      memory: 2GiB
+      cores: 2
+      ssh_key: ssh-rsa AAA...LGx user@fqdn
+      disks:
+        - size: 10GiB
+          name: data
+          storage_domain: mynfsstorage
+          interface: virtio
+
+    db_vm:
+      cluster: production
+      domain: example.com
+      template: rhel7
+      memory: 4GiB
+      cores: 1
+      ssh_key: ssh-rsa AAA...LGx user@fqdn
+      disks:
+        - size: 50GiB
+          name: data
+          storage_domain: mynfsstorage
+          interface: virtio
+
+    vms:
+      - name: postgresql-vm-0
+        tag: postgresql_vm
+        profile: "{{ db_vm }}"
+      - name: postgresql-vm-1
+        tag: postgresql_vm
+        profile: "{{ db_vm }}"
+      - name: apache-vm
+        tag: httpd_vm
+        profile: "{{ httpd_vm }}"
+
+  roles:
+    - ovirt-vm-infra

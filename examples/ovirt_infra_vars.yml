@@ -1,0 +1,126 @@
+---
+###########################
+# REST API variables
+###########################
+engine_url: https://ovirt-engine.example.com/ovirt-engine/api
+engine_user: admin@internal
+engine_cafile: /etc/pki/ovirt-engine/ca.pem
+
+###########################
+# Common
+###########################
+compatibility_version: 4.1
+
+# Data center
+data_center_name: mydatacenter
+
+###########################
+# Clusters
+###########################
+clusters:
+ - name: production
+   cpu_type: Intel Conroe Family
+   profile: production
+
+###########################
+# Hosts
+###########################
+hosts:
+ - name: myhost
+   address: 1.2.3.5
+   cluster: production
+   password: 123456
+ - name: myhost1
+   address: 1.2.3.6
+   cluster: production
+   password: 123456
+
+###########################
+# Storage
+###########################
+storages:
+ mynfsstorage:
+  master: true
+  state: present
+  nfs:
+   address: 1.2.3.4
+   path: /om02
+ myiscsistorage:
+  iscsi:
+   target: iqn.2014-07.org.ovirt:storage
+   port: 3260
+   address: 192.168.200.3
+   username: username
+   password: password
+   lun_id: 3600140551fcc8348ea74a99b6760fbb4
+ mytemplates:
+  domain_function: export
+  nfs:
+   address: 192.168.200.3
+   path: /exports/nfs/exported
+ myisostorage:
+  domain_function: iso
+  nfs:
+   address: 192.168.200.3
+   path: /exports/nfs/iso
+
+###########################
+# Networks
+###########################
+logical_networks:
+ - name: mynetwork
+   clusters:
+    - name: development
+      assigned: false
+      required: true
+      display: false
+      migration: true
+      gluster: false
+
+host_networks:
+ - name: myhost1
+   check: true
+   save: true
+   bond:
+    name: bond0
+    mode: 2
+    interfaces:
+     - eth2
+     - eth3
+   networks:
+    - name: mynetwork
+      boot_protocol: dhcp
+
+###########################
+# Users & Groups
+###########################
+users:
+ - name: user1
+   authz_name: internal-authz
+   password: 1234568
+   valid_to: "2018-01-01 00:00:00Z"
+ - name: user2
+   authz_name: internal-authz
+   password: 1234568
+   valid_to: "2018-01-01 00:00:00Z"
+
+user_groups:
+ - name: group1
+   authz_name: internal-authz
+   users:
+    - user1
+
+permissions:
+ - state: present
+   user_name: user1
+   authz_name: internal-authz
+   role: UserRole
+   object_type: cluster
+   object_name: production
+
+ - state: present
+   group_name: group1
+   authz_name: internal-authz
+   role: UserRole
+   object_type: cluster
+   object_name: production
