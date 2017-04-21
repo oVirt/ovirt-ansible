@@ -95,6 +95,7 @@
       auth: "{{ ovirt_auth }}"
       name: "{{ template_name }}"
       vm: "{{ vm_name }}"
+      timeout: "{{ template_timeout }}"
     when: ovirt_templates | length == 0
     tags:
       - ovirt-template-image
