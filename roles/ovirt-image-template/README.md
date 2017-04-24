@@ -26,6 +26,7 @@ Role Variables
 | template_disk_size | 10GiB                 | Size of the template disk  |
 | template_disk_format | cow                 | Format of the template disk  |
 | template_disk_interface | virtio           | Interface of the template disk |
+| template_timeout   | 600                   | Timeout to wait for the template to be created |
 | template_nics      | {name: nic1, profile_name: ovirtmgmt, interface: virtio} | List of dictionarie specifing the nics of template |
 
 Dependencies

@@ -6,6 +6,7 @@ template_memory: 2GiB
 template_cpu: 1
 template_disk_size: 10GiB
 template_operating_system: rhel_7x64
+template_timeout: 600
 template_nics:
   - name: nic1
     profile_name: ovirtmgmt

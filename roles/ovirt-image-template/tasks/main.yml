@@ -95,20 +95,21 @@
       auth: "{{ ovirt_auth }}"
       name: "{{ template_name }}"
       vm: "{{ vm_name }}"
+      timeout: "{{ template_timeout }}"
     when: ovirt_templates | length == 0
     tags:
       - ovirt-template-image
   
-  - name: Remove vm
-    ovirt_vms:
-      auth: "{{ ovirt_auth }}"
-      state: absent
-      name: "{{ vm_name }}"
-    when: ovirt_templates | length == 0
-    tags:
-      - ovirt-template-image
-
   always:
+    - name: Remove vm
+      ovirt_vms:
+        auth: "{{ ovirt_auth }}"
+        state: absent
+        name: "{{ vm_name }}"
+      when: ovirt_templates | length == 0
+      tags:
+        - ovirt-template-image
+
     - name: Logout from oVirt
       ovirt_auth:
         state: absent
