@@ -1,9 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2017 Red Hat, Inc.
+# Copyright (c) 2016 Red Hat, Inc.
 #
-
+# This file is part of Ansible
+#
+# Ansible is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Ansible is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 ANSIBLE_METADATA = {'metadata_version': '1.0',
                     'status': ['preview'],
@@ -159,8 +173,6 @@ options:
             - "C(legacy) - Legacy behavior of 3.6 version."
             - "C(minimal_downtime) - Virtual machines should not experience any significant downtime."
             - "C(suspend_workload) - Virtual machines may experience a more significant downtime."
-            - "C(post_copy) - Virtual machines should not experience any significant downtime.
-               If the VM migration is not converging for a long time, the migration will be switched to post-copy."
         choices: ['legacy', 'minimal_downtime', 'suspend_workload']
     serial_policy:
         description:
@@ -260,6 +272,7 @@ from ansible.module_utils.ovirt import (
     check_sdk,
     create_connection,
     equal,
+    get_link_name,
     ovirt_full_argument_spec,
     search_by_name,
 )
@@ -298,7 +311,6 @@ class ClustersModule(BaseModule):
         # legacy - 00000000-0000-0000-0000-000000000000
         # minimal downtime - 80554327-0569-496b-bdeb-fcbbf52b827b
         # suspend workload if needed - 80554327-0569-496b-bdeb-fcbbf52b827c
-        # post copy - a7aeedb2-8d66-4e51-bb22-32595027ce71
         migration_policy = self.param('migration_policy')
         if migration_policy == 'legacy':
             return '00000000-0000-0000-0000-000000000000'
@@ -306,8 +318,6 @@ class ClustersModule(BaseModule):
             return '80554327-0569-496b-bdeb-fcbbf52b827b'
         elif migration_policy == 'suspend_workload':
             return '80554327-0569-496b-bdeb-fcbbf52b827c'
-        elif migration_policy == 'post_copy':
-            return 'a7aeedb2-8d66-4e51-bb22-32595027ce71'
 
     def _get_sched_policy(self):
         sched_policy = None
@@ -436,7 +446,6 @@ class ClustersModule(BaseModule):
         )
 
     def update_check(self, entity):
-        sched_policy = self._get_sched_policy()
         migration_policy = getattr(entity.migration, 'policy', None)
         return (
             equal(self.param('comment'), entity.comment) and
@@ -465,7 +474,7 @@ class ClustersModule(BaseModule):
             equal(self.param('migration_compressed'), str(entity.migration.compressed)) and
             equal(self.param('serial_policy'), str(getattr(entity.serial_number, 'policy', None))) and
             equal(self.param('serial_policy_value'), getattr(entity.serial_number, 'value', None)) and
-            equal(self.param('scheduling_policy'), getattr(sched_policy, 'name', None)) and
+            equal(self.param('scheduling_policy'), get_link_name(self._connection, entity.scheduling_policy)) and
             equal(self._get_policy_id(), getattr(migration_policy, 'id', None)) and
             equal(self._get_memory_policy(), entity.memory_policy.over_commit.percent) and
             equal(self.__get_minor(self.param('compatibility_version')), self.__get_minor(entity.version)) and
@@ -512,10 +521,7 @@ def main():
         migration_bandwidth_limit=dict(default=None, type='int'),
         migration_auto_converge=dict(default=None, choices=['true', 'false', 'inherit']),
         migration_compressed=dict(default=None, choices=['true', 'false', 'inherit']),
-        migration_policy=dict(
-            default=None,
-            choices=['legacy', 'minimal_downtime', 'suspend_workload', 'post_copy']
-        ),
+        migration_policy=dict(default=None, choices=['legacy', 'minimal_downtime', 'suspend_workload']),
         serial_policy=dict(default=None, choices=['vm', 'host', 'custom']),
         serial_policy_value=dict(default=None),
         scheduling_policy=dict(default=None),
