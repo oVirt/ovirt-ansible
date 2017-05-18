@@ -1,0 +1,128 @@
+---
+- name: Download the qcow image
+  get_url:
+    url: "{{ miq_qcow_url }}"
+    dest: "{{ miq_image_path }}"
+    checksum: "{{ miq_image_checksum | default(omit) }}"
+  register: downloaded
+
+- name: Check file type
+  command: "/usr/bin/file {{ miq_image_path | quote }}"
+  changed_when: false
+  register: filetype
+
+- name: Fail if image is not qcow
+  fail:
+    msg: "The downloaded file is not a valid QCOW file."
+  when: '"QCOW" not in filetype.stdout'
+
+- block:
+  - name: Login to oVirt engine
+    ovirt_auth:
+      username: "{{ engine_user }}"
+      password: "{{ engine_password }}"
+      url: "https://{{ engine_fqdn }}/ovirt-engine/api"
+      ca_file: "{{ engine_cafile | default(omit) }}"
+      insecure: "{{ engine_cafile is undefined }}"
+    tags:
+      - always
+
+  - name: Fetch storages
+    ovirt_storage_domains_facts:
+      auth: "{{ ovirt_auth }}"
+    when: vm_disk_storage is undefined
+  
+  - name: Find data domain
+    set_fact:
+      disk_storage_domain: "{{ ovirt_storage_domains|json_query(the_query)|list|first}}"
+    when: vm_disk_storage is undefined
+    vars:
+      the_query: "[?type=='data']"
+  
+  - name: Check if VM already exists
+    ovirt_vms_facts:
+      auth: "{{ ovirt_auth }}"
+      pattern: "name={{ miq_vm_name }}"
+  
+  - name: Deploy the qcow image to oVirt engine
+    ovirt_disks:
+      auth: "{{ ovirt_auth }}"
+      name: "{{ miq_vm_disk_name | default(miq_vm_name) }}"
+      interface: "{{ miq_vm_disk_interface }}"
+      size: "{{ miq_vm_disk_size}}"
+      format: "{{  miq_vm_disk_format }}"
+      image_path: "{{ miq_image_path }}"
+      storage_domain: "{{ miq_vm_disk_storage | default(disk_storage_domain.name) }}"
+      force: "{{ ovirt_vms | length == 0 }}"
+    register: ovirt_disk
+    when: ovirt_vms | length == 0
+  
+  - name: Create vm
+    ovirt_vms:
+      auth: "{{ ovirt_auth }}"
+      name: "{{ miq_vm_name }}"
+      cluster: "{{ miq_vm_cluster }}"
+      memory: "{{ miq_vm_memory }}"
+      cpu_cores: "{{ miq_vm_cpu }}"
+      operating_system: "{{ miq_vm_os }}"
+      type: server
+      disks:
+        - id: "{{ ovirt_disk.id }}"
+          bootable: true
+      cloud_init: "{{ miq_vm_cloud_init | default(omit) }}"
+      nics: "{{ miq_vm_nics }}"
+    when: ovirt_vms | length == 0
+    register: create_vm
+
+  - name: Wait for VM IP
+    ovirt_vms_facts:
+      auth: "{{ ovirt_auth }}"
+      pattern: "name={{ miq_vm_name }}"
+      fetch_nested: true
+      nested_attributes: ips
+    until: ovirt_vms | map(attribute='reported_devices') | list | first | length > 0
+    retries: 10
+    delay: 10
+
+  rescue:
+    - name: Remove VM if deploy fails
+      ovirt_vms:
+        auth: "{{ ovirt_auth }}"
+        name: "{{ miq_vm_name }}"
+        state: absent
+
+  always:
+    - name: Logout from oVirt engine
+      ovirt_auth:
+        state: absent
+        ovirt_auth: "{{ ovirt_auth }}"
+      tags:
+        - always
+
+- block:
+  - name: Wait for ManageIQ/CloudForms API
+    uri:
+      url: "https://{{  ovirt_vms | map(attribute='reported_devices') | first | map(attribute='ips') | first | map(attribute='address') | first }}/api/"
+      validate_certs: no
+      user: "{{ miq_username }}"
+      password: "{{ miq_password }}"
+    register: miq_vm
+    until: "miq_vm.status == 200"
+    retries: 50
+    delay: 20
+
+  - name: Add oVirt/RHV provider to ManageIQ/CloudForms
+    uri:
+      url: "https://{{  ovirt_vms | map(attribute='reported_devices') | first | map(attribute='ips') | first | map(attribute='address') | first }}/api/providers"
+      validate_certs: no
+      method: POST
+      user: "{{ miq_username }}"
+      password: "{{ miq_password }}"
+      body: "{{ lookup('template', 'add_rhv_provider.j2') }}"
+      force_basic_auth: yes
+      body_format: json
+    register: miq_rhv_provider
+    changed_when: "miq_rhv_provider.status == 201 or miq_rhv_provider.status == 200"
+    failed_when: "'error' in miq_rhv_provider.json and 'has already been taken' not in miq_rhv_provider.json.error.message"
+
+  when: "create_vm is defined"
