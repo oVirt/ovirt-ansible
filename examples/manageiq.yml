@@ -1,0 +1,23 @@
+---
+- name: oVirt ManageIQ deployment
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    # Contains encrypted `engine_password` and `metrics_password`
+    # varibale using ansible-vault
+    - passwords.yml
+
+  vars:
+    engine_fqdn: ovirt.example.com
+    engine_user: admin@internal
+    engine_cafile: /etc/pki/ovirt-engine/ca.pem
+
+    metrics_fqdn: metrics.example.com
+    metrics_port: 8443
+    metrics_user: admin
+
+
+  roles:
+    - ovirt-manageiq
