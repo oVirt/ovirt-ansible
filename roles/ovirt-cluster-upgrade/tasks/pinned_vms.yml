@@ -1,0 +1,33 @@
+- name: Create list of host IDs which has pinned VM and are not down
+  set_fact:
+    host_ids_items: "{{ item.placement_policy.hosts[0].id }}"
+  with_items:
+    - "{{ ovirt_vms | default([]) }}"
+  when: "'hosts' in item['placement_policy'] and item.placement_policy.hosts | length == 1 and item.status != 'down'"
+  loop_control:
+    label: "{{ item.name }}" 
+  register: host_ids_result
+
+- name: Create list of host IDs which has pinned VM
+  set_fact:
+    host_ids: "{{ host_ids_result.results | rejectattr('ansible_facts', 'undefined') | map(attribute='ansible_facts.host_ids_items') | list }}"
+
+- block:
+  - name: Shutdown pin to one host VMs
+    ovirt_vms:
+      auth: "{{ ovirt_auth }}"
+      state: stopped
+      force: true
+      name: "{{ item.name }}"
+    with_items:
+      - "{{ ovirt_vms }}"
+    when: "'hosts' in item['placement_policy'] and item.placement_policy.hosts | length == 1"
+    loop_control:
+      label: "{{ item.name }}"
+    register: pinned_to_host_vms
+
+  - name: Create list of VM names which was shutted down
+    set_fact:
+      pinned_vms_names: "{{ pinned_to_host_vms.results | selectattr('changed') | map(attribute='item.name') | list }}"
+
+  when: "stop_pinned_to_host_vms"
