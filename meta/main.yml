@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: "Ondra Machacek"
+  description: "oVirt Ansible roles"
+  company: Red Hat, Inc.
+  license: Apache License 2.0
+  min_ansible_version: 2.2
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Fedora
+      versions:
+      - 24
+      - 25
+  galaxy_tags: [ovirt, rhv, rhev, virtualization]
