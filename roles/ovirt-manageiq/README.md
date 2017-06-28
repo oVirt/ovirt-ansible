@@ -31,11 +31,13 @@ Role Variables
 --------------
 
 QCOW varibles:
+
 | Name          | Default value                                            |  Description                                                 |
 |---------------|----------------------------------------------------------|--------------------------------------------------------------|
 | miq_qcow_url  | http:////releases.manageiq.org/manageiq-ovirt-fine-1.qc2 | Define the URL where the ManageIQ/CloudForms qcow is stored. |
 
 oVirt/RHV engine login variables:
+
 | Name                | Default value     |  Description                                    |
 |---------------------|-------------------|-------------------------------------------------|
 | engine_user         | UNDEF             | Define the user to be used to access oVirt/RHV. |
@@ -44,6 +46,7 @@ oVirt/RHV engine login variables:
 | engine_ca           | UNDEF             | Define the path to the CA of the oVirt/RHV.     |
 
 Virtual Machine variables:
+
 | Name               | Default value     |  Description                                 |
 |--------------------|-------------------|----------------------------------------------|
 | miq_vm_name        | manageiq_fine     | Define the name of the ManageIQ/CloudForms VM in oVirt/RHV. |
@@ -54,6 +57,7 @@ Virtual Machine variables:
 | miq_vm_cloud_init  | UNDEF             | Define cloud init dictionary to be passed to virtual machine. |
 
 Virtual Machine disks variables:
+
 | Name                | Default value     |  Description                                         |
 |---------------------|-------------------|------------------------------------------------------|
 | miq_vm_disk_name    | `miq_vm_name`     | Define name of the virtual machine disk.             | 
@@ -63,11 +67,13 @@ Virtual Machine disks variables:
 | miq_vm_disk_format  | cow               | Define the format of the virtual machine disk.       |
 
 Virtual Machine nics variables:
+
 | Name                | Default value     |  Description                                         |
 |---------------------|-------------------|------------------------------------------------------|
 | miq_vm_nics         | {'name': 'nic1', 'profile_name': 'ovirtmgmt', 'interaface': 'virtio'} | Dictionary variable which define network interfaces for virtual machine. |
 
 RHV provider variables:
+
 | Name                  | Default value     |  Description                                         |
 |-----------------------|-------------------|------------------------------------------------------|
 | miq_rhv_provider_name | RHV provider      | Name of the RHV provider to be displayed in ManageIQ.|

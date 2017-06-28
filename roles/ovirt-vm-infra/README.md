@@ -1,7 +1,7 @@
-oVirt virtual machine infratructure
-===================================
+oVirt virtual machine infrastructure
+====================================
 
-This role manage the virtual machine infrastracture in oVirt.
+This role manage the virtual machine infrastructure in oVirt.
 
 Requirements
 ------------
@@ -14,7 +14,7 @@ Role Variables
 
 | Name               | Default value     |                                              |
 |--------------------|-------------------|----------------------------------------------| 
-| vms                | UNDEF             | List of dictinaries with VM specification    |
+| vms                | UNDEF             | List of dictionaries with VM specification   |
 | wait_for_ip        | true              | Whether the playbook should wait for VMs IP, reported by guest agent  |
 | debug_vm_create    | false             | Whether the log of VM creating task should be logged (it can contain passwords) |
 
@@ -24,7 +24,7 @@ The item in `vms` list can contain following attributes:
 |--------------------|-----------------------|--------------------------------------------| 
 | name               | UNDEF                 | Name of the VM to be created               |
 | tag                | UNDEF                 | Name of the tag to be assigned to VM       |
-| profile            | UNDEF                 | Dictionary specifing the VM HW see below   |
+| profile            | UNDEF                 | Dictionary specifying the VM HW see below  |
 
 The `profile` dictionary can contain following attributes:
 
@@ -34,8 +34,8 @@ The `profile` dictionary can contain following attributes:
 | template           | Blank                 | Name of template the VM should be based on   |
 | memory             | 2GiB                  | Amount of the memory of the VM               |
 | cores              | 1                     | Number of CPU cores of the VM                |
-| disks              | UNDEF                 | Dictionary specifing additional VM disks     |
-| nics               | UNDEF                 | List of dictinaries specifing NICs of VM     |
+| disks              | UNDEF                 | Dictionary specifying additional VM disks    |
+| nics               | UNDEF                 | List of dictionaries specifying NICs of VM   |
 | ssh_key            | UNDEF                 | SSH key to be deployed to VM                 |
 | domain             | UNDEF                 | The domain of the VM                         |
 | root_password      | UNDEF                 | root password of the VM                      |
