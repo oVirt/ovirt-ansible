@@ -1,7 +1,7 @@
 oVirt AAA JDBC
 ==============
 
-This role manages users and groups in an AAA JDBC extension.
+The ovirt-aaa-jdbc role manages users and groups in an AAA JDBC extension.
 
 Requirements
 ------------

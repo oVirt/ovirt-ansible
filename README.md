@@ -4,7 +4,7 @@
 
 This repository contains various Ansible roles that can be used to manage oVirt.
 
-## Logical roles
+## Logical Roles
 
 Logical roles are used to group component roles, or implement specific scenarios on top of
 oVirt components.
@@ -15,7 +15,7 @@ oVirt components.
 * [ovirt-manageiq]
 * [ovirt-vm-infra]
 
-## Component roles
+## Component Roles
 
 Component roles enable you to manage the lifecycle of a specific oVirt component.
 

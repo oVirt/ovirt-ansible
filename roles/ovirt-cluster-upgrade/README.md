@@ -1,7 +1,7 @@
-oVirt cluster upgrade
+oVirt Cluster Upgrade
 =========
 
-This role will iterate through all hosts in cluster and upgrades them.
+The ovirt-cluster-upgrade role iterates through all the hosts in a cluster and upgrades them.
 
 Requirements
 ------------
@@ -15,11 +15,11 @@ Role Variables
 | Name                    | Default value         |                                                     |
 |-------------------------|-----------------------|-----------------------------------------------------|
 | cluster_name            | Default               | Name of the cluster to be upgraded.                 |
-| stopped_vms             | UNDEF                 | List of VM names to be stopped before upgrade.      |
-| stop_pinned_to_host_vms | false                 | If true the pinned to host VMs will be stopped.     |
+| stopped_vms             | UNDEF                 | List of virtual machines to stop before upgrading.      |
+| stop_pinned_to_host_vms | false                 | Specify whether to stop virtual machines pinned to the host being upgraded. If true, the pinned virtual machines will be stopped.     |
 | upgrade_timeout         | 1200                  | Timeout in seconds to wait for host to be upgraded. |
-| host_statuses           | [UP]                  | If the hosts are in any of the statuses specified by this list, the host will be upgraded. |
-| host_names              | [\*]                  | List of host names which should be upgraded.        |
+| host_statuses           | [UP]                  | List of host statuses. If a host is in any of the specified statuses then it will be upgraded. |
+| host_names              | [\*]                  | List of host names to be upgraded.        |
 
 Dependencies
 ------------
