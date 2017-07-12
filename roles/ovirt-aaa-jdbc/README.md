@@ -1,7 +1,7 @@
 oVirt AAA JDBC
 ==============
 
-This role manages users and groups in AAA JDBC extension.
+This role manages users and groups in an AAA JDBC extension.
 
 Requirements
 ------------
@@ -11,24 +11,24 @@ Requirements
 Role Variables
 --------------
 
-The item in `users` list can contain following parameters:
+The `users` list can contain the following parameters:
 
 | Name          | Default value  | Description                           |
 |---------------|----------------|---------------------------------------|
-| state         | present        | Whether the user should be present or absent |
-| name          | UNDEF          | Name of the user                      |
-| authz_name    | UNDEF          | Authorization provider of the user    |
-| password      | UNDEF          | Password of the user                  |
-| valid_to      | UNDEF          | The date until the account should be valid |
+| state         | present        | Specifies whether the user is present or absent. |
+| name          | UNDEF          | Name of the user.                      |
+| authz_name    | UNDEF          | Authorization provider of the user.    |
+| password      | UNDEF          | Password of the user.                  |
+| valid_to      | UNDEF          | Specifies the date that the account remains valid. |
 
-The item in `user_groups` list can contain following parameters:
+The `user_groups` list can contain the following parameters:
 
 | Name          | Default value  | Description                           |
 |---------------|----------------|---------------------------------------|
-| state         | present        | Whether the group should be present or absent |
-| name          | UNDEF          | Name of the group                     |
-| authz_name    | UNDEF          | Authorization provider of the group   |
-| users         | UNDEF          | List of user names which should be part of this group |
+| state         | present        | Specifies whether the group is present or absent. |
+| name          | UNDEF          | Name of the group.                     |
+| authz_name    | UNDEF          | Authorization provider of the group.   |
+| users         | UNDEF          | List of users that belong to this group. |
 
 Dependencies
 ------------
