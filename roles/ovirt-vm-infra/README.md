@@ -39,6 +39,7 @@ The `profile` dictionary can contain following attributes:
 | ssh_key            | UNDEF                 | SSH key to be deployed to VM                 |
 | domain             | UNDEF                 | The domain of the VM                         |
 | root_password      | UNDEF                 | root password of the VM                      |
+| high_availability  | UNDEF                 | Whether or not the node should be set highly available |
 
 The item in `disks` list can contain following attributes:
 
