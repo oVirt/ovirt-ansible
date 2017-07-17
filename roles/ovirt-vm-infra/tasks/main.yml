@@ -21,6 +21,7 @@
       name: "{{ item.name }}"
       memory: "{{ item.profile.memory }}"
       cpu_cores: "{{ item.profile.cores }}"
+      high_availability: "{{ item.profile.high_availability | default(omit) }}"
       cloud_init:
         host_name: "{{ item.name }}.{{ item.profile.domain | default(omit) }}"
         authorized_ssh_keys: "{{ item.profile.ssh_key | default('') }}"
