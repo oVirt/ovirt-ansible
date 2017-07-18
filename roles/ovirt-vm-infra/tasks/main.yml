@@ -73,6 +73,10 @@
       query: "[?tag=='{{ item }}']"
     tags:
       - ovirt-vm-infra
+
+  - name: Apply any Affinity Groups
+    include_role:
+      name: ovirt-affinity-groups
   
   - name: Wait for VMs IP
     ovirt_vms_facts:
