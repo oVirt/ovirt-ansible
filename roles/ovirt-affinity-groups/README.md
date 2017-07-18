@@ -14,7 +14,7 @@ Role Variables
 
 | Name               | Default value       |                                              |
 |--------------------|---------------------|----------------------------------------------|
-| cluster            | UNDEF               |  Name of the cluster of the affinity group.  |
+| cluster            | UNDEF (Required)    |  Name of the cluster of the affinity group.  |
 | description        | UNDEF               |  Human readable description.                 |
 | host_enforcing     | false               |  If true VM cannot start on host if it does not satisfy the host_rule.|
 | host_rule          | UNDEF               |  positive: VM's in this group must run on this host. negative: VM's in this group may not run on this host |
