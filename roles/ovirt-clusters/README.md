@@ -1,7 +1,7 @@
-oVirt clusters
+oVirt Clusters
 ==============
 
-This role setup oVirt clusters.
+The ovirt-clusters role is used set up oVirt clusters.
 
 Requirements
 ------------
@@ -14,33 +14,33 @@ Role Variables
 
 | Name                  | Default value         |  Description                            |
 |-----------------------|-----------------------|-----------------------------------------|
-| clusters              | UNDEF                 | List of dictionaries describing cluster |
-| data_center_name      | UNDEF                 | Name of the data center                 |
-| compatibility_version | UNDEF                 | Compatibility version of data center    |
+| clusters              | UNDEF                 | List of dictionaries that describe the cluster. |
+| data_center_name      | UNDEF                 | Name of the data center.                 |
+| compatibility_version | UNDEF                 | Compatibility version of data center.    |
 
-The item in `clusters` list can contain following parameters:
+The `clusters` list can contain the following parameters:
 
 | Name                              | Default value       | Description                             |
 |-----------------------------------|---------------------|-----------------------------------------|
-| name                              | UNDEF               | Name of the cluster                     |
-| state                             | present             | State of the cluster                    |
-| cpu_type                          | Intel Conroe Family | CPU type of the cluster                 |
-| profile                           | UNDEF               | Cluster profile. You can choose predefined cluster profile, see below |
-| ballooning                        | UNDEF               | Enable memory balloon optimization |
-| description                       | UNDEF               | Description of the cluster |
-| ksm                               | UNDEF               | Enables to run Kernel Same-page Merging |
-| ksm_numa                          | UNDEF               | Enables KSM for best berformance inside NUMA nodes |
-| vm_reason                         | UNDEF               | Enable an optional reason field when a virtual machine is shut down |
-| host_reason                       | UNDEF               | Enable an optional reason field when a host is placed into maintenance |
-| memory_policy                     | UNDEF               | Memory policy of the cluster |
-| migration_policy                  | UNDEF               | Migration policy of the cluster |
-| scheduling_policy                 | UNDEF               | Scheduling policy of the cluster |
-| ha_reservation                    | UNDEF               | Enable monitoring of cluster capacity for highly available virtual machines |
-| fence_enabled                     | UNDEF               | Enables fencing on the cluster |
-| fence_skip_if_connectivity_broken | UNDEF               | If True fencing will be temporarily disabled if the percentage of hosts in the cluster that are experiencing connectivity issues is greater than or equal to the defined threshold |
-| fence_skip_if_sd_active           | UNDEF               | If True any hosts in the cluster that are Non Responsive and still connected to storage will not be fenced |
+| name                              | UNDEF               | Name of the cluster.                     |
+| state                             | present             | State of the cluster.                    |
+| cpu_type                          | Intel Conroe Family | CPU type of the cluster.                 |
+| profile                           | UNDEF               | The cluster profile. You can choose a predefined cluster profile, see the tables below. |
+| ballooning                        | UNDEF               | If True, enables memory balloon optimization. |
+| description                       | UNDEF               | Description of the cluster. |
+| ksm                               | UNDEF               | If True, enables Kernel Same-page Merging (KSM). |
+| ksm_numa                          | UNDEF               | If True, enables KSM for the best performance inside NUMA nodes. |
+| vm_reason                         | UNDEF               | If True, enables an optional reason field when a virtual machine is shut down. |
+| host_reason                       | UNDEF               | If True, enables an optional reason field when a host is placed into maintenance. |
+| memory_policy                     | UNDEF               | The memory policy used by the cluster. |
+| migration_policy                  | UNDEF               | The migration policy used by the cluster. |
+| scheduling_policy                 | UNDEF               | The scheduling policy used by the cluster. |
+| ha_reservation                    | UNDEF               | If True, monitors the cluster capacity for highly available virtual machines. |
+| fence_enabled                     | UNDEF               | If True, enables fencing on the cluster. |
+| fence_skip_if_connectivity_broken | UNDEF               | If True, fencing will be temporarily disabled if the percentage of hosts in the cluster that are experiencing connectivity issues is greater than or equal to the defined threshold. |
+| fence_skip_if_sd_active           | UNDEF               | If True, any hosts in the cluster that are Non Responsive and still connected to storage will not be fenced. |
 
-More information about the parameters can be found [here](http://docs.ansible.com/ansible/ovirt_clusters_module.html).
+More information about the parameters can be found in the [Ansible documentation](http://docs.ansible.com/ansible/ovirt_clusters_module.html).
 
 Possible `profile` options are `development` and `production`, their default values are described below:
 
