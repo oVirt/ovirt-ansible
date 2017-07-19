@@ -1,33 +1,33 @@
-oVirt template image
+oVirt Image Template
 ====================
 
-This role download the qcow image from specified URL and create a template from it.
+The `ovirt-image-template` role downloads a QCOW2 image from a specified URL and creates a template from it.
 
 Requirements
 ------------
 
- * Ansible version 2.3 or higher
- * Python SDK version 4 or higher
+ * Ansible version 2.3 or higher.
+ * Python SDK version 4 or higher.
  * oVirt has to be 4.0.4 or higher and [ovirt-imageio] must be installed and running.
- * CA certificate of oVirt engine. Path to CA must be specified in `ovirt_ca` variable.
+ * CA certificate of oVirt engine. The path to CA certificate must be specified in the `ovirt_ca` variable.
 
 Role Variables
 --------------
 
 | Name               | Default value         |                            |
 |--------------------|-----------------------|----------------------------| 
-| qcow_url           | UNDEF                 | The URL of the qcow2 image |
-| image_path         | /tmp/ovirt_image_data | Path where qcow2 image should be downloaded |
-| template_cluster   | Default               | Name of the cluster where template should be created |
-| template_name      | mytemplate            | Name of the template |
-| template_memory    | 2GiB                  | Amount of memory of template |
-| template_cpu       | 1                     | Number of CPU of template  |
-| template_disk_storage | UNDEF              | Name of storage domain where disk should be created. If not specified the storage domain is choosen automatically |
-| template_disk_size | 10GiB                 | Size of the template disk  |
-| template_disk_format | cow                 | Format of the template disk  |
-| template_disk_interface | virtio           | Interface of the template disk |
-| template_timeout   | 600                   | Timeout to wait for the template to be created |
-| template_nics      | {name: nic1, profile_name: ovirtmgmt, interface: virtio} | List of dictionarie specifing the nics of template |
+| qcow_url           | UNDEF                 | The URL of the QCOW2 image. |
+| image_path         | /tmp/ovirt_image_data | Path where QCOW2 image must be downloaded. |
+| template_cluster   | Default               | Name of the cluster where template must be created. |
+| template_name      | mytemplate            | Name of the template. |
+| template_memory    | 2GiB                  | Amount of memory assigned to the template. |
+| template_cpu       | 1                     | Number of CPUs assigned to the template.  |
+| template_disk_storage | UNDEF              | Name of the storage domain where the disk must be created. If not specified, the storage domain is selected automatically. |
+| template_disk_size | 10GiB                 | The size of the template disk.  |
+| template_disk_format | cow                 | Format of the template disk.  |
+| template_disk_interface | virtio           | Interface of the template disk. |
+| template_timeout   | 600                   | Amount of time to wait for the template to be created. |
+| template_nics      | {name: nic1, profile_name: ovirtmgmt, interface: virtio} | List of dictionaries that specify the NICs of template. |
 
 Dependencies
 ------------
