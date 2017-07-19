@@ -1,7 +1,7 @@
-oVirt hosts
+oVirt Hosts
 ===========
 
-This role setup oVirt hosts.
+The `ovirt-hosts` role is used to set up oVirt hosts.
 
 Requirements
 ------------
@@ -12,17 +12,17 @@ Requirements
 Role Variables
 --------------
 
-The item in `hosts` list can contain following parameters:
+The `hosts` list can contain the following parameters:
 
 | Name          | Default value  | Description                           |
 |---------------|----------------|---------------------------------------|
-| name          | UNDEF          | Name of the host                      |
-| state         | present        | State of the host                     |
-| address       | UNDEF          | IP or FQDN of the host                |
-| password      | UNDEF          | Root password of the host             |
-| cluster       | UNDEF          | Cluster which host should connect     |
-| timeout       | 1200           | Maximum wait time for host to be UP   |
-| poll_interval | 20             | Polling interval to check host status |
+| name          | UNDEF          | Name of the host.                      |
+| state         | present        | Specifies whether the host is `present` or `absent`.  |
+| address       | UNDEF          | IP address or FQDN of the host.   |
+| password      | UNDEF          | The host's root password.             |
+| cluster       | UNDEF          | The cluster that the host must connect to.    |
+| timeout       | 1200           | Maximum wait time for the host to be in an UP state.  |
+| poll_interval | 20             | Polling interval to check the host status. |
 
 Dependencies
 ------------

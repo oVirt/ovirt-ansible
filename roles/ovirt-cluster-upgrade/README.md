@@ -1,7 +1,7 @@
 oVirt Cluster Upgrade
 =========
 
-The ovirt-cluster-upgrade role iterates through all the hosts in a cluster and upgrades them.
+The `ovirt-cluster-upgrade` role iterates through all the hosts in a cluster and upgrades them.
 
 Requirements
 ------------

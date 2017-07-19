@@ -1,7 +1,7 @@
 oVirt AAA JDBC
 ==============
 
-The ovirt-aaa-jdbc role manages users and groups in an AAA JDBC extension.
+The `ovirt-aaa-jdbc` role manages users and groups in an AAA JDBC extension.
 
 Requirements
 ------------
@@ -15,7 +15,7 @@ The `users` list can contain the following parameters:
 
 | Name          | Default value  | Description                           |
 |---------------|----------------|---------------------------------------|
-| state         | present        | Specifies whether the user is present or absent. |
+| state         | present        | Specifies whether the user is `present` or `absent`. |
 | name          | UNDEF          | Name of the user.                      |
 | authz_name    | UNDEF          | Authorization provider of the user.    |
 | password      | UNDEF          | Password of the user.                  |
@@ -25,7 +25,7 @@ The `user_groups` list can contain the following parameters:
 
 | Name          | Default value  | Description                           |
 |---------------|----------------|---------------------------------------|
-| state         | present        | Specifies whether the group is present or absent. |
+| state         | present        | Specifies whether the group is `present` or `absent`. |
 | name          | UNDEF          | Name of the group.                     |
 | authz_name    | UNDEF          | Authorization provider of the group.   |
 | users         | UNDEF          | List of users that belong to this group. |
