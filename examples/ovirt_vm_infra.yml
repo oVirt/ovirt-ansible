@@ -50,5 +50,14 @@
         tag: httpd_vm
         profile: "{{ httpd_vm }}"
 
+    affinity_groups:
+      - name: db-ag
+        cluster: production
+        vm_enforcing: true
+        vm_rule: negative
+        vms:
+          - postgresql-vm-0
+          - postgresql-vm-1
+
   roles:
     - ovirt-vm-infra
