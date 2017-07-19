@@ -1,7 +1,7 @@
-oVirt datacenters
+oVirt Datacenters
 =================
 
-This role setup oVirt datacenter.
+The `ovirt-datacenters` role is used to set up oVirt datacenters.
 
 Requirements
 ------------
@@ -14,10 +14,10 @@ Role Variables
 
 | Name                     | Default value         | Description                          |
 |--------------------------|-----------------------|--------------------------------------|
-| data_center_name         | UNDEF                 | Name of the data center              |
-| data_center_description  | UNDEF                 | Description of the data center       |
-| data_center_local        | false                 | Whether the data center should be shared or local |
-| compatibility_version    | UNDEF                 | Compatibility version of data center |
+| data_center_name         | UNDEF                 | Name of the data center.              |
+| data_center_description  | UNDEF                 | Description of the data center.       |
+| data_center_local        | false                 | Specify whether the data center is shared or local. |
+| compatibility_version    | UNDEF                 | Compatibility version of data center. |
 
 Dependencies
 ------------
