@@ -1,7 +1,7 @@
 oVirt Clusters
 ==============
 
-The ovirt-clusters role is used set up oVirt clusters.
+The `ovirt-clusters` role is used set up oVirt clusters.
 
 Requirements
 ------------
