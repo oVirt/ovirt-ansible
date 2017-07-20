@@ -17,12 +17,12 @@ Role Variables
 | Name               | Default value         |                            |
 |--------------------|-----------------------|----------------------------| 
 | qcow_url           | UNDEF                 | The URL of the QCOW2 image. |
-| image_path         | /tmp/ovirt_image_data | Path where QCOW2 image must be downloaded. |
+| image_path         | /tmp/ovirt_image_data | Path where the QCOW2 image will be downloaded to. |
 | template_cluster   | Default               | Name of the cluster where template must be created. |
 | template_name      | mytemplate            | Name of the template. |
 | template_memory    | 2GiB                  | Amount of memory assigned to the template. |
 | template_cpu       | 1                     | Number of CPUs assigned to the template.  |
-| template_disk_storage | UNDEF              | Name of the storage domain where the disk must be created. If not specified, the storage domain is selected automatically. |
+| template_disk_storage | UNDEF              | Name of the data storage domain where the disk must be created. If not specified, the data storage domain is selected automatically. |
 | template_disk_size | 10GiB                 | The size of the template disk.  |
 | template_disk_format | cow                 | Format of the template disk.  |
 | template_disk_interface | virtio           | Interface of the template disk. |
