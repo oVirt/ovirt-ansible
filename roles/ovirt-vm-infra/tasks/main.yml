@@ -30,6 +30,7 @@
       cloud_init_nics: "{{ item.profile.nics | default([]) }}"
     with_items:
       - "{{ vms }}"
+    changed_when: false
     async: 800
     poll: 0
     register: all_vms
@@ -55,10 +56,13 @@
       size: "{{ item.1.size }}"
       format: "{{ item.1.format | default('cow') }}"
       interface: "{{ item.1.interface | default(omit) }}"
+      bootable: "{{ item.1.bootable | default(omit) }}"
       storage_domain: "{{ item.1.storage_domain | default(omit) }}"
     with_subelements:
       - "{{ vms }}"
       - profile.disks
+      - flags:
+        skip_missing: True
     tags:
       - ovirt-vm-infra
   
@@ -85,7 +89,7 @@
     until: ovirt_vms | map(attribute='reported_devices') | list | first | length > 0
     retries: 5
     delay: 5
-    when: "{{ wait_for_ip }}"
+    when: "wait_for_ip"
     tags:
       - wait_for_ip
       - ovirt-vm-infra

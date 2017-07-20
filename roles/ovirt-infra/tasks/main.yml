@@ -1,3 +1,2 @@
 ---
-# tasks file for roles/ovirt-infra
-
+# Currently empty, we only depend on component roles
