@@ -78,7 +78,6 @@ Example Playbook
       template: rhel7
       memory: 4GiB
       cores: 2
-      disks: []
 
     httpd_vm:
       cluster: production
@@ -87,7 +86,6 @@ Example Playbook
       template: rhel7
       memory: 2GiB
       cores: 2
-      disks: []
 
     vms:
       - name: apache-vm
