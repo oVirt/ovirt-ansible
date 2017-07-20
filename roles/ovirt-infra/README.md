@@ -1,7 +1,7 @@
-oVirt infra
+oVirt Infra
 =========
 
-This role setup oVirt infrastructure including: data centers, clusters, networks, hosts, users and groups.
+The `ovirt-infra` role enables you to set up oVirt infrastructure including: data centers, clusters, networks, hosts, users, and groups.
 
 Requirements
 ------------
@@ -12,39 +12,44 @@ Requirements
 Role Variables
 --------------
 
-From [ovirt-datacenters]:
+The role has dependencies on multiple other oVirt roles. The following list displays the dependencies and their associated variables. See the documentation for more information about the dependency and its variables. 
 
-| Name                                | Default value         |                                      |
-|-------------------------------------|-----------------------|--------------------------------------|
-| data_center_name                    | UNDEF                 | Name of the data center              |
-| data_center_description             | UNDEF                 | Description of the data center       |
-| data_center_local                   | false                 | Whether the data center should be shared or local |
-| compatibility_version               | UNDEF                 | Compatibility version of data center |
+* [ovirt-datacenters]:
 
-From [ovirt-clusters]:
+ This role accepts the following variables:
+ - `data_center_name`
+ - `data_center_description`
+ - `data_center_local`
+ - `compatibility_version`
+ 
+* [ovirt-clusters]:
 
-This role accept only one variable called `clusters`. To see example of this variable please check the role's documentation.
+ This role accepts a variable called `clusters`. 
 
-From [ovirt-hosts]:
+* [ovirt-hosts]:
 
-This role accept only one variable called `hosts`. To see example of this variable please check the role's documentation.
+ This role accepts a variable called `hosts`. 
 
-From [ovirt-networks]:
+* [ovirt-networks]:
 
-This role accept variable called `logical_networks`, which setup logical networks in oVirt. To see example of this variable please check the role's documentation.
-This role accept variable called `host_networks`, which setup host networks in oVirt. To see example of this variable please check the role's documentation.
+ This role accepts the following variables:
+ - `logical_networks`
+ - `host_networks`
+ 
+* [ovirt-storages]:
 
-From [ovirt-storages]:
+ This role accepts a variable called `storages`. 
 
-This role accept variable called `storages`, which setup different storages in oVirt. To see example of this variable please check the role's documentation.
+* [ovirt-aaa-jdbc]:
 
-From [ovirt-aaa-jdbc]:
+ This role accepts the following variables:
+ - `users`
+ - `groups`
 
-This role accept variable called `users` and `groups`, which creates users and groups in AAA jdbc extension. To see example of this variable please check the role's documentation.
+ 
+* [ovirt-permissions]:
 
-From [ovirt-permissions]:
-
-This role accept variable called `permissions`, which manges permissions of users and groups. To see example of this variable please check the role's documentation.
+ This role accepts a variable called `permissions`. 
 
 Dependencies
 ------------
