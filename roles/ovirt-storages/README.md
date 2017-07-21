@@ -1,7 +1,7 @@
-oVirt storages
+oVirt Storages
 ==============
 
-This role setup oVirt storages.
+The `ovirt-storages` role is used to set up oVirt storages.
 
 Requirements
 ------------
@@ -16,15 +16,15 @@ The value of item in `storages` dictionary can contain following parameters (the
 
 | Name            | Default value  | Description                           |
 |-----------------|----------------|---------------------------------------|
-| master          | false          | If true the storage will be added as first, meaning it will be master storage |
-| domain_function | data           | Function of the storage domain (iso, export or data) |
-| nfs             | UNDEF          | Dictionary defining NFS storage |
-| iscsi           | UNDEF          | Dictionary defining iSCSI storage |
-| posixfs         | UNDEF          | Dictionary defining PosixFS storage |
-| fcp             | UNDEF          | Dictionary defining FCP storage |
-| glusterfs       | UNDEF          | Dictionary defining glusterFS storage |
+| master          | false          | If true, the storage will be added as the first storage, meaning it will be the master storage. |
+| domain_function | data           | The function of the storage domain. Possible values are: <ul><li>iso</li><li>export</li><li>data</li></ul>. |
+| nfs             | UNDEF          | Dictionary defining NFS storage. |
+| iscsi           | UNDEF          | Dictionary defining iSCSI storage. |
+| posixfs         | UNDEF          | Dictionary defining PosixFS storage. |
+| fcp             | UNDEF          | Dictionary defining FCP storage. |
+| glusterfs       | UNDEF          | Dictionary defining glusterFS storage. |
 
-More information about storages parameters can be found [here](http://docs.ansible.com/ansible/ovirt_storage_domains_module.html).
+More information about the storages parameters can be found in the [Ansible documentation](http://docs.ansible.com/ansible/ovirt_storage_domains_module.html).
 
 
 Dependencies
