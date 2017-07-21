@@ -1,7 +1,7 @@
-oVirt virtual machine infrastructure
+oVirt Virtual Machine Infrastructure
 ====================================
 
-This role manage the virtual machine infrastructure in oVirt.
+The `ovirt-vm-infra` role manages the virtual machine infrastructure in oVirt.
 
 Requirements
 ------------
@@ -14,41 +14,41 @@ Role Variables
 
 | Name               | Default value     |                                              |
 |--------------------|-------------------|----------------------------------------------| 
-| vms                | UNDEF             | List of dictionaries with VM specification   |
-| wait_for_ip        | true              | Whether the playbook should wait for VMs IP, reported by guest agent  |
-| debug_vm_create    | false             | Whether the log of VM creating task should be logged (it can contain passwords) |
+| vms                | UNDEF             | List of dictionaries with virtual machine specifications.   |
+| wait_for_ip        | true              | If true, the playbook should wait for the virtual machine IP reported by the guest agent.  |
+| debug_vm_create    | false             | If true, logs the tasks of the virtual machine being created. The log can contain passwords. |
 
-The item in `vms` list can contain following attributes:
+The `vms` list can contain following attributes:
 
 | Name               | Default value         |                                            |
 |--------------------|-----------------------|--------------------------------------------| 
-| name               | UNDEF                 | Name of the VM to be created               |
-| tag                | UNDEF                 | Name of the tag to be assigned to VM       |
-| profile            | UNDEF                 | Dictionary specifying the VM HW see below  |
+| name               | UNDEF                 | Name of the virtual machine to create.     |
+| tag                | UNDEF                 | Name of the tag to assign to the virtual machine.  |
+| profile            | UNDEF                 | Dictionary specifying the virtual machine hardware. See the table below.  |
 
 The `profile` dictionary can contain following attributes:
 
 | Name               | Default value         |                                              |
 |--------------------|-----------------------|----------------------------------------------| 
-| cluster            | Default               | Name of the cluster where VM will be created |
-| template           | Blank                 | Name of template the VM should be based on   |
-| memory             | 2GiB                  | Amount of the memory of the VM               |
-| cores              | 1                     | Number of CPU cores of the VM                |
-| disks              | UNDEF                 | Dictionary specifying additional VM disks    |
-| nics               | UNDEF                 | List of dictionaries specifying NICs of VM   |
-| ssh_key            | UNDEF                 | SSH key to be deployed to VM                 |
-| domain             | UNDEF                 | The domain of the VM                         |
-| root_password      | UNDEF                 | root password of the VM                      |
-| high_availability  | UNDEF                 | Whether or not the node should be set highly available |
+| cluster            | Default               | Name of the cluster where the virtual machine will be created. |
+| template           | Blank                 | Name of template that the virtual machine should be based on.   |
+| memory             | 2GiB                  | Amount of virtual machine memory.               |
+| cores              | 1                     | Number of CPU cores used by the the virtual machine.          |
+| disks              | UNDEF                 | Dictionary specifying the additional virtual machine disks.    |
+| nics               | UNDEF                 | List of dictionaries specifying the NICs of the virtual machine.   |
+| ssh_key            | UNDEF                 | SSH key to be deployed to the virtual machine.                 |
+| domain             | UNDEF                 | The domain of the virtual machine.                         |
+| root_password      | UNDEF                 | The root password of the virtual machine.                      |
+| high_availability  | UNDEF                 | Whether or not the node should be set highly available. |
 
-The item in `disks` list can contain following attributes:
+The `disks` list can contain following attributes:
 
 | Name               | Default value  |                                              |
 |--------------------|----------------|----------------------------------------------| 
-| size               | UNDEF          | The size of the additional disk |
-| name               | UNDEF          | The name of the additional disk  |
-| storage_domain     | UNDEF          | The name of storage domain where disk should be created |
-| interface          | UNDEF          | The interface of the disk |
+| size               | UNDEF          | The size of the additional disk. |
+| name               | UNDEF          | The name of the additional disk.  |
+| storage_domain     | UNDEF          | The name of storage domain where disk should be created. |
+| interface          | UNDEF          | The interface of the disk. |
 
 Dependencies
 ------------
