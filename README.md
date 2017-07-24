@@ -29,6 +29,10 @@ The [ovirt-infra] role implements the following helper component roles:
  * [ovirt-permissions]
  * [ovirt-storages]
 
+The [ovirt-vm-infra] role includes the following helper component role:
+
+ * [ovirt-affinity-groups]
+
 [ovirt-infra]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-infra/README.md
 [ovirt-image-template]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-image-template/README.md
 [ovirt-vm-infra]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-vm-infra/README.md
@@ -41,3 +45,4 @@ The [ovirt-infra] role implements the following helper component roles:
 [ovirt-storages]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-storages/README.md
 [ovirt-cluster-upgrade]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-cluster-upgrade/README.md
 [ovirt-manageiq]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-manageiq/README.md
+[ovirt-affinity-groups]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-affinity-groups/README.md
