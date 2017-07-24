@@ -1,7 +1,7 @@
-oVirt affinity groups
+oVirt Affinity Groups
 ====================================
 
-This role manages affinity groups in oVirt.
+The `ovirt-affinity-groups` role is used to manage oVirt affinity groups.
 
 Requirements
 ------------
@@ -16,13 +16,13 @@ Role Variables
 |--------------------|---------------------|----------------------------------------------|
 | cluster            | UNDEF (Required)    |  Name of the cluster of the affinity group.  |
 | description        | UNDEF               |  Human readable description.                 |
-| host_enforcing     | false               |  If true VM cannot start on host if it does not satisfy the host_rule.|
-| host_rule          | UNDEF               |  positive: VM's in this group must run on this host. negative: VM's in this group may not run on this host |
+| host_enforcing     | false               |  <ul><li>true - VM cannot start on host if it does not satisfy the `host_rule`.</li><li>false - VM will follow `host_rule` with soft enforcement.</li></ul>|
+| host_rule          | UNDEF               |  <ul><li>positive - VM's in this group must run on this host.</li> <li>negative - VM's in this group may not run on this host</li></ul> |
 | hosts              | UNDEF               |  List of host names assigned to this group.  |
 | name               | UNDEF (Required)    |  Name of affinity group.                     |
 | state              | UNDEF               |  Whether group should be present or absent.  |
-| vm_enforcing       | false               |  If true, VM cannot start if it cannot satisfy the vm_rule. |
-| vm_rule            | UNDEF               |  positive: all vms in this group try to run on the same host. negative: all vms in this group try to run on separate hosts. disabled: this affinity group does not take effect. |
+| vm_enforcing       | false               |  <ul><li>true - VM cannot start if it cannot satisfy the `vm_rule`.</li><li>false - VM will follow `vm_rule` with soft enforcement.</li></ul> |
+| vm_rule            | UNDEF               |  <ul><li>positive - all vms in this group try to run on the same host.</li><li>negative - all vms in this group try to run on separate hosts.</li><li>disabled - this affinity group does not take effect.</li></ul> |
 | vms                | UNDEF               |  List of VM's to be assigned to this affinity group. |
 | wait               | false               |  If true, the module should wait for the desired state. |
 
