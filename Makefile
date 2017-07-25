@@ -26,6 +26,7 @@ PKG_DATA_DIR=$(DATAROOT_DIR)/$(PACKAGE_NAME)
 PKG_DOC_DIR=$(DATAROOT_DIR)/doc/${PACKAGE_NAME}
 ANSIBLE_DOC_DIR=$(DATAROOT_DIR)/doc/ansible/roles
 ANSIBLE_DATA_DIR=${PKG_DATA_DIR}/roles
+ROLE_PREFIX=ovirt.
 
 #
 # CUSTOMIZATION-END
@@ -65,15 +66,15 @@ dist:	ovirt-ansible-roles.spec
 	@echo
 
 copy-recursive:
-	( cd "$(SOURCEDIR)" && find . -type d -printf '%P\n' ) | while read d; do \
-		install -d -m 755 "$(TARGETDIR)/$${d}"; \
+	( cd "$(SOURCEDIR)" && find . ! -path . -type d -printf '%P\n' ) | while read d; do \
+		install -d -m 755 "$(TARGETDIR)/$(ROLE_PREFIX)$${d}"; \
 	done
 	( \
 		cd "$(SOURCEDIR)" && find . -type f -printf '%P\n' | \
 		while read f; do echo "$${f}"; done \
 	) | while read f; do \
 		src="$(SOURCEDIR)/$${f}"; \
-		dst="$(TARGETDIR)/$${f}"; \
+		dst="$(TARGETDIR)/$(ROLE_PREFIX)$${f}"; \
 		[ -x "$${src}" ] && MASK=0755 || MASK=0644; \
 		install -T -m "$${MASK}" "$${src}" "$${dst}"; \
 	done
