@@ -42,5 +42,5 @@ make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_dat
 %license %{_docdir}/%{name}/LICENSE
 
 %changelog
-* Tue Jul 25 2017 Ondra Machacek <omachace@redhat.com> - 0.1-1
+* Wed Jul 25 2017 Ondra Machacek <omachace@redhat.com> - 1.1.0-1
 - Initial release.
