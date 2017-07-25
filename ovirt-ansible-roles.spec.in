@@ -1,0 +1,45 @@
+%global ansible_roles_dir ansible/roles
+
+%global make_common_opts \\\
+	PREFIX=%{_prefix} \\\
+	SYSCONF_DIR=%{_sysconfdir} \\\
+	DATAROOT_DIR=%{_datadir} \\\
+	LOCALSTATE_DIR=%{_localstatedir} \\\
+	BUILD_VALIDATION=0
+
+Name: @PACKAGE_NAME@
+Summary: Set of Ansible roles for oVirt management
+Version: @RPM_VERSION@
+Release: @RPM_RELEASE@%{?release_suffix}%{?dist}
+Source0: http://resources.ovirt.org/pub/src/@PACKAGE_NAME@/@PACKAGE_NAME@-@PACKAGE_VERSION@.tar.gz
+License: ASL 2.0
+Group:          Virtualization/Management
+BuildArch:      noarch
+Url:            http://www.ovirt.org
+
+Requires: ansible >= 2.3.0
+
+%description
+Collection of Ansible roles to ease the management and automation of the oVirt engine.
+
+%prep
+%setup -c -q
+
+%build
+make %{make_common_opts} dist
+
+%install
+make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_datadir}/%{ansible_roles_dir}"
+
+%files
+%{_datadir}/%{ansible_roles_dir}
+
+%doc %{_docdir}/%{name}/README.md
+%doc %{_docdir}/%{name}/examples/
+%doc %{_docdir}/%{ansible_roles_dir}/
+
+%license %{_docdir}/%{name}/LICENSE
+
+%changelog
+* Thu Jul 20 2017 Ondra Machacek <omachace@redhat.com> - 1.0.0-1
+- Initial release.

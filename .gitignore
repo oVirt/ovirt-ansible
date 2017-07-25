@@ -1,2 +1,6 @@
 *retry
 .tox
+*.tar.gz
+output/
+ovirt-ansible-roles.spec
+exported-artifacts/
