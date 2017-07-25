@@ -50,9 +50,9 @@ EXAMPLES = '''
 # Examples don't contain auth parameter for simplicity,
 # look at ovirt_auth module to see how to reuse authentication:
 
-# Gather facts about all scheduling policies with name InClusterUpgrade:
+# Gather facts about all scheduling policies with name cluster_maintenance:
 - ovirt_scheduling_policies_facts:
-    name: InClusterUpgrade
+    name: cluster_maintenance
 - debug:
     var: ovirt_scheduling_policies
 '''

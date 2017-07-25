@@ -47,11 +47,19 @@
         auth: "{{ ovirt_auth }}"
         pattern: "cluster={{ cluster_name }}"
   
+    - name: Get API facts
+      ovirt_api_facts:
+        auth: "{{ ovirt_auth }}"
+
     - name: Set in cluster upgrade policy
       ovirt_clusters:
         auth: "{{ ovirt_auth }}"
         name: "{{ cluster_name }}"
-        scheduling_policy: InClusterUpgrade
+        scheduling_policy: cluster_maintenance
+      register: cluster_policy
+      when:
+        - (ovirt_api.product_info.version.major >= 4 and ovirt_api.product_info.version.major >= 2) or
+          (ovirt_api.product_info.version.major == 4 and ovirt_api.product_info.version.major == 1 and ovirt_api.product_info.version.revision >= 4)
   
     - name: Shutdown VMs which can be stopped
       ovirt_vms:
@@ -78,6 +86,7 @@
           auth: "{{ ovirt_auth }}"
           name: "{{ cluster_name }}"
           scheduling_policy: "{{ cluster_scheduling_policy }}"
+        when: cluster_policy.changed | default(false)
   
       - name: Start again stopped VMs
         ovirt_vms:
