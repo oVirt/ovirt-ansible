@@ -10,6 +10,7 @@ Logical roles are used to group component roles, or implement specific scenarios
 oVirt components.
 
 * [ovirt-cluster-upgrade]
+* [ovirt-host-deploy]
 * [ovirt-infra]
 * [ovirt-image-template]
 * [ovirt-manageiq]
@@ -24,6 +25,7 @@ The [ovirt-infra] role implements the following helper component roles:
  * [ovirt-aaa-jdbc]
  * [ovirt-clusters]
  * [ovirt-datacenters]
+ * [ovirt-host-deploy-firewalld]
  * [ovirt-hosts]
  * [ovirt-networks]
  * [ovirt-permissions]
@@ -46,3 +48,5 @@ The [ovirt-vm-infra] role includes the following helper component role:
 [ovirt-cluster-upgrade]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-cluster-upgrade/README.md
 [ovirt-manageiq]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-manageiq/README.md
 [ovirt-affinity-groups]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-affinity-groups/README.md
+[ovirt-host-deploy]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-host-deploy/README.md
+[ovirt-host-deploy-firewalld]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-host-deploy-firewalld/README.md

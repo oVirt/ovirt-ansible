@@ -1,0 +1,3 @@
+---
+host_deploy_firewalld_cluster_specific:
+  - port: 22/tcp

@@ -1,0 +1,9 @@
+host_deploy_firewalld_rules:
+  ## Service definition:
+  - service: rpc-bind
+  - service: snmp
+  - service: cockpit
+
+  ## Port definition:
+  # ovirt-imageio-daemon
+  - port: 54322/tcp

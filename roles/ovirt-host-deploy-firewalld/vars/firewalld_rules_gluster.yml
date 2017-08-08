@@ -1,0 +1,13 @@
+host_deploy_firewalld_rules:
+  ## Service definition:
+  - service: glusterfs
+  - service: nfs
+  - service: ctdb
+  - service: ovirt-storageconsole
+  - service: nrpe
+  - service: samba
+
+  ## Port definition:
+  # nlockmgr
+  - port: 963/udp
+  - port: 965/tcp
