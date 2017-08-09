@@ -19,6 +19,7 @@ galaxy_info:
   galaxy_tags: [ovirt, rhv, rhev, virtualization]
 
 dependencies:
+  - ovirt-mac-pools
   - ovirt-datacenters
   - ovirt-clusters
   - ovirt-hosts
