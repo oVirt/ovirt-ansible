@@ -1,7 +1,7 @@
-oVirt permissions
+oVirt Permissions
 =================
 
-This role setup oVirt permissions.
+The `ovirt-permissions` role is used to set up oVirt permissions.
 
 Requirements
 ------------
@@ -12,17 +12,17 @@ Requirements
 Role Variables
 --------------
 
-The item in `permissions` list can contain following parameters:
+The `permissions` list can contain following parameters:
 
 | Name          | Default value  | Description                |
 |---------------|----------------|----------------------------|
-| state         | present        | State of the permission    |
-| user_name     | UNDEF          | User name of user to manage permission |
-| group_name    | UNDEF          | Name of group to manage permission |
-| authz_name    | UNDEF          | Name of the authorization provider of the group or user |
-| role          | UNDEF          | Role to be assigned to user or group |
-| object_type   | UNDEF          | The object type which should be used to assign permission |
-| object_name   | UNDEF          | Name of the object where permission should be assigned |
+| state         | present        | Specifies whether the state of the permission is `present` or `absent`.    |
+| user_name     | UNDEF          | The user to manage the permission for. |
+| group_name    | UNDEF          | Name of the group to manage the permission for. |
+| authz_name    | UNDEF          | Name of the authorization provider of the group or user. |
+| role          | UNDEF          | The role to be assigned to the user or group. |
+| object_type   | UNDEF          | The object type which should be used to assign the permission. Possible object types are:<ul><li>data_center</li><li>cluster</li><li>host</li><li>storage_domain</li><li>network</li><li>disk</li><li>vm</li><li>vm_pool</li><li>template</li><li>cpu_profile</li><li>disk_profile</li><li>vnic_profile</li><li>system</li></ul> |
+| object_name   | UNDEF          | Name of the object where the permission should be assigned. |
 
 Dependencies
 ------------
