@@ -25,4 +25,5 @@ dependencies:
   - ovirt-networks
   - ovirt-storages
   - ovirt-aaa-jdbc
+  - ovirt-external-providers
   - ovirt-permissions
