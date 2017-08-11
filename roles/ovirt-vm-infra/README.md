@@ -29,7 +29,7 @@ The `vms` list can contain following attributes:
 The `profile` dictionary can contain following attributes:
 
 | Name               | Default value         |                                              |
-|--------------------|-----------------------|----------------------------------------------| 
+|--------------------|-----------------------|----------------------------------------------|
 | cluster            | Default               | Name of the cluster where the virtual machine will be created. |
 | template           | Blank                 | Name of template that the virtual machine should be based on.   |
 | memory             | 2GiB                  | Amount of virtual machine memory.               |
@@ -40,6 +40,8 @@ The `profile` dictionary can contain following attributes:
 | domain             | UNDEF                 | The domain of the virtual machine.                         |
 | root_password      | UNDEF                 | The root password of the virtual machine.                      |
 | high_availability  | UNDEF                 | Whether or not the node should be set highly available. |
+| storage_domain     | UNDEF                 | Name of the storage domain where all virtual machine disks should be created. Considered only when template is provided.|
+| state              | present               | Should the Virtual Machine be running/stopped/present/absent/suspended/next_run.|
 
 The `disks` list can contain following attributes:
 
@@ -86,6 +88,7 @@ Example Playbook
       template: rhel7
       memory: 2GiB
       cores: 2
+      storage_domain: my_storage_domain
 
     vms:
       - name: apache-vm
