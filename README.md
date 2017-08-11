@@ -1,8 +1,10 @@
 [![Build Status](https://travis-ci.org/oVirt/ovirt-ansible.svg?branch=master)](https://travis-ci.org/oVirt/ovirt-ansible)
 
-# oVirt Ansible
+# oVirt Ansible Roles
 
-This repository contains various Ansible roles that can be used to manage oVirt.
+oVirt maintains multiple Ansible roles that can be deployed to easily configure and manage various parts of the oVirt infrustructure. Ansible roles provide a method of modularizing your Ansible code, in other words; it enables you to break up large playbooks into smaller reusable files. This enables you to have a separate role for each component of the infrustructure, and allows you to reuse and share roles with other users. For more information about roles, see [Creating Reusable Playbooks] in the Ansible Documentation.
+
+The oVirt roles can be divided into two types of roles: Logical roles and Component roles.
 
 ## Logical Roles
 
@@ -20,7 +22,7 @@ oVirt components.
 
 Component roles enable you to manage the lifecycle of a specific oVirt component.
 
-The [ovirt-infra] role implements the following helper component roles:
+The [ovirt-infra] logical role implements the following helper component roles:
 
  * [ovirt-aaa-jdbc]
  * [ovirt-clusters]
@@ -34,6 +36,32 @@ The [ovirt-infra] role implements the following helper component roles:
 The [ovirt-vm-infra] role includes the following helper component role:
 
  * [ovirt-affinity-groups]
+ 
+## Installing the oVirt Roles
+
+There are multiple methods to install the Ansible roles on your Ansible server.
+
+### Installing from a Package
+
+__Note:__ You must have the official oVirt repository enabled. For more information see the [oVirt Deployment Options].
+
+The Ansible roles are packaged into an RPM file that can be installed from the command line.
+
+Run the following command:
+```
+# yum install ovirt-ansible-roles 
+```
+By default the roles will be installed to `/usr/share/ansible/roles`.
+
+### Installing using Galaxy
+
+Ansible provides a command line utility to install Roles directory from the Galaxy Repository. See the [Galaxy] website for more information about Galaxy.
+
+To install the role using Galaxy, run the following from the command line:
+```
+# ansible-galaxy install ovirt.ovirt-ansible-roles
+```
+By default the roles will be installed to `/etc/ansible/roles`.
 
 [ovirt-infra]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-infra/README.md
 [ovirt-image-template]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-image-template/README.md
@@ -50,3 +78,6 @@ The [ovirt-vm-infra] role includes the following helper component role:
 [ovirt-affinity-groups]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-affinity-groups/README.md
 [ovirt-host-deploy]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-host-deploy/README.md
 [ovirt-host-deploy-firewalld]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-host-deploy-firewalld/README.md
+[Creating Reusable Playbooks]: http://docs.ansible.com/ansible/latest/playbooks_reuse.html
+[oVirt Deployment Options]: https://www.ovirt.org/download/
+[Galaxy]: https://galaxy.ansible.com/
