@@ -2,7 +2,7 @@
 
 VERSION_MAJOR=1
 VERSION_MINOR=0
-VERSION_PATCH_LEVEL=0
+VERSION_PATCH_LEVEL=1
 VERSION=$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH_LEVEL)
 
 # Milestone is manually specified,
@@ -32,4 +32,4 @@ MILESTONE=master
 # while N is incremented each re-release
 # Use only for spec file changes
 #
-RPM_RELEASE=0.1.$(MILESTONE).$(shell date -u +%Y%m%d%H%M%S)
+RPM_RELEASE=1
