@@ -41,5 +41,10 @@ make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_dat
 %license %{_docdir}/%{name}/LICENSE
 
 %changelog
+* Wed Aug 16 2017 Ondra Machacek <omachace@redhat.com> - 1.0.1-1
+- Remove ovirt. prefix from role names.
+- Add affinity group role.
+- Documentation improvements.
+
 * Tue Jul 25 2017 Ondra Machacek <omachace@redhat.com> - 1.0.0-1
 - Initial release.
