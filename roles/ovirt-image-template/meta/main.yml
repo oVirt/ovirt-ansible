@@ -1,6 +1,6 @@
 galaxy_info:
   author: Ondra Machacek
-  description: Role to create template from qcow2 image.
+  description: Role to create template from external image.
   company: Red Hat, Inc.
 
   license: Apache License 2.0
