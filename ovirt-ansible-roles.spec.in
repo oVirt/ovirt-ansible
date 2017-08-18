@@ -1,4 +1,5 @@
 %global ansible_roles_dir ansible/roles
+%global ansible_hostdeploy_post_tasks ovirt-host-deploy-post-tasks.yml
 
 %global make_common_opts \\\
 	PREFIX=%{_prefix} \\\
@@ -29,11 +30,13 @@ Collection of Ansible roles to ease the management and automation of the oVirt e
 make %{make_common_opts} dist
 
 %install
-make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_datadir}/%{ansible_roles_dir}"
+make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_datadir}/%{ansible_roles_dir}" POST_TASKS_FILE=%{ansible_hostdeploy_post_tasks}
 
 %files
 %{_datadir}/%{ansible_roles_dir}
 %{_datadir}/%{name}/playbooks
+
+%{_sysconfdir}/%{name}/%{ansible_hostdeploy_post_tasks}
 
 %doc %{_docdir}/%{name}/README.md
 %doc %{_docdir}/%{name}/examples/
@@ -42,5 +45,5 @@ make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_dat
 %license %{_docdir}/%{name}/LICENSE
 
 %changelog
-* Wed Jul 25 2017 Ondra Machacek <omachace@redhat.com> - 1.1.0-1
+* Tue Aug 15 2017 Ondra Machacek <omachace@redhat.com> - 1.1.0-1
 - Initial release.

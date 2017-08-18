@@ -24,6 +24,7 @@ DATAROOT_DIR=$(PREFIX)/share
 DOC_DIR=$(DATAROOT_DIR)/doc
 PKG_DATA_DIR=$(DATAROOT_DIR)/$(PACKAGE_NAME)
 PKG_DOC_DIR=$(DATAROOT_DIR)/doc/${PACKAGE_NAME}
+PKG_SYSCONF_DIR=$(SYSCONF_DIR)/$(PACKAGE_NAME)
 ANSIBLE_DOC_DIR=$(DATAROOT_DIR)/doc/ansible/roles
 ANSIBLE_DATA_DIR=${PKG_DATA_DIR}/roles
 
@@ -116,6 +117,10 @@ create-symlink:
 	mkdir -p ${DESTDIR}$(PKG_DATA_DIR)/playbooks/
 	ln -fs "$(ANSIBLE_DATA_DIR)" "${DESTDIR}$(PKG_DATA_DIR)/playbooks/"
 
+create-post-tasks:
+	install -d -m 0755 "$(DESTDIR)$(PKG_SYSCONF_DIR)"
+	touch "$(DESTDIR)$(PKG_SYSCONF_DIR)/$(POST_TASKS_FILE)"
+
 install: $(NULL)
 	$(MAKE) copy-recursive SOURCEDIR=roles TARGETDIR="${DESTDIR}$(ANSIBLE_DATA_DIR)"
 	$(MAKE) copy-recursive SOURCEDIR=playbooks TARGETDIR="${DESTDIR}$(PKG_DATA_DIR)/playbooks"
@@ -124,3 +129,4 @@ install: $(NULL)
 	$(MAKE) create-license
 	$(MAKE) create-readme
 	$(MAKE) create-symlink
+	$(MAKE) create-post-tasks
