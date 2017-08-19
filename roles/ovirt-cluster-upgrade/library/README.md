@@ -6,6 +6,7 @@ Here is the list of bug fixes provided by this role:
 1. ovirt_hosts.py
 
 ⋅⋅⋅Contains a bug fix to cover upgrade proccess of host in maintanance state. [PR](https://github.com/ansible/ansible/pull/25169)
+⋅⋅⋅Contains a feature to check for upgrade before sending upgrade action. [PR](https://github.com/ansible/ansible/pull/28437)
 
 ⋅⋅⋅The fix will be available in Ansible 2.3.1.
 
