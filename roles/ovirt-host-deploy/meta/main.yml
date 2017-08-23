@@ -1,6 +1,6 @@
 galaxy_info:
   author: Ondra Machacek
-  description: Role to deplo oVirt hypervisor.
+  description: Role to deploy oVirt hypervisor.
   company: Red Hat, Inc.
 
   license: Apache License 2.0
