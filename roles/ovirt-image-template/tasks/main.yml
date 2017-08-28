@@ -1,8 +1,8 @@
 ---
 - name: Fail when invalid parameters
   fail:
-    msg: "You must either specify qcow2_url or glance_image"
-  when: "glance_image is defined and qcow2_url is defined"
+    msg: "You must either specify qcow_url or glance_image"
+  when: "glance_image is defined and qcow_url is defined"
 
 - name: Glance image
   include: glance_image.yml
@@ -10,4 +10,4 @@
 
 - name: QCOW2 image
   include: qcow2_image.yml
-  when: "qcow2_url is defined"
+  when: "qcow_url is defined"
