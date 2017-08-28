@@ -1,6 +1,6 @@
 ---
 - name: Fetch info about VDSM
-  command: bash -c "rpm -qi vdsm | grep -oE 'Version\\s+:\\s+[0-9\\.]+' | awk '{print $3}'"
+  command: bash -c "rpm -q vdsm --qf '%{VERSION}'"
   changed_when: false
   register: vdsm_version
 
