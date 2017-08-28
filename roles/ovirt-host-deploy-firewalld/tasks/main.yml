@@ -68,4 +68,4 @@
   when:
     - "host_deploy_override_firewall"
     - "host_deploy_firewall_type == 'FIREWALLD'"
-    - "host_deploy_firewalld_supported or vdsm_version | version_compare('4.20', '>=')"
+    - "vdsm_version | version_compare('4.20', '>=')"
