@@ -19,7 +19,6 @@ BuildArch:      noarch
 Url:            http://www.ovirt.org
 
 Requires: ansible >= 2.3.0
-Requires: python-jmespath
 
 %description
 Collection of Ansible roles to ease the management and automation of the oVirt engine.
@@ -46,5 +45,17 @@ make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_dat
 %license %{_docdir}/%{name}/LICENSE
 
 %changelog
-* Tue Aug 15 2017 Ondra Machacek <omachace@redhat.com> - 1.1.0-1
+* Tue Aug 29 2017 Ondra Machacek <omachace@redhat.com> - 1.1.0-1
+- ovirt-image-template: add glance as disk source (#30)
+- ovirt-vm-infra: allow set state and sd for vm (#37)
+- introduce ovirt set mac pool role (#24)
+- introduce ovirt-external-provider role (#20)
+- ovirt-host-deploy: Add firewalld role (#7)
+
+* Wed Aug 16 2017 Ondra Machacek <omachace@redhat.com> - 1.0.1-1
+- Remove ovirt. prefix from role names.
+- Add affinity group role.
+- Documentation improvements.
+
+* Tue Jul 25 2017 Ondra Machacek <omachace@redhat.com> - 1.0.0-1
 - Initial release.
