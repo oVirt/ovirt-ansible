@@ -53,7 +53,7 @@ The `disks` list can contain following attributes:
 Dependencies
 ------------
 
-No.
+ * [ovirt-affinity-groups]
 
 Example Playbook
 ----------------
@@ -105,3 +105,5 @@ License
 -------
 
 Apache License 2.0
+
+[ovirt-affinity-groups]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-affinity-groups/README.md
