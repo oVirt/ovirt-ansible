@@ -15,7 +15,7 @@
   - name: Get hosts
     ovirt_hosts_facts:
       auth: "{{ ovirt_auth }}"
-      pattern: "cluster={{ cluster_name | mandatory }} update_available=true {{ host_names | map('regex_replace', '(.*)', 'name=\\1') | list | join(' or ') }} {{ host_statuses | map('regex_replace', '(.*)', 'status=\\1') | list | join(' or ') }}"
+      pattern: "cluster={{ cluster_name | mandatory }} {{ check_upgrade | ternary('', 'update_available=true') }} {{ host_names | map('regex_replace', '(.*)', 'name=\\1') | list | join(' or ') }} {{ host_statuses | map('regex_replace', '(.*)', 'status=\\1') | list | join(' or ') }}"
   
   - name: Check if there are hosts to be updated
     debug:
@@ -106,7 +106,6 @@
       - name: Print info about host which was updated
         debug:
           msg: "Following hosts was successfully updated: {{ succeed_host_names }}"
-        when: "succeed_host_names | length > 0"
 
       - name: Fail the playbook, if some hosts wasn't updated
         fail:
