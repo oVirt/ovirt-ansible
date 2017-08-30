@@ -2,7 +2,7 @@
 
 VERSION_MAJOR=1
 VERSION_MINOR=0
-VERSION_PATCH_LEVEL=1
+VERSION_PATCH_LEVEL=2
 VERSION=$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH_LEVEL)
 
 # Milestone is manually specified,
@@ -20,7 +20,7 @@ VERSION=$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH_LEVEL)
 # - master
 # - <none>
 #
-MILESTONE=master
+MILESTONE=
 
 # RPM release is manually specified,
 # For pre-release:

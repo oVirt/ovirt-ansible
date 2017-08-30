@@ -41,6 +41,10 @@ make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_dat
 %license %{_docdir}/%{name}/LICENSE
 
 %changelog
+* Thu Aug 31 2017 Ondra Machacek <omachace@redhat.com> - 1.0.2-1
+- Update library of ovirt-cluster-ugprade role.
+- Added Getting Started information.
+
 * Wed Aug 16 2017 Ondra Machacek <omachace@redhat.com> - 1.0.1-1
 - Remove ovirt. prefix from role names.
 - Add affinity group role.
