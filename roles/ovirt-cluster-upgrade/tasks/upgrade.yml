@@ -6,12 +6,14 @@
       auth: "{{ ovirt_auth }}"
       name: "{{ item.name }}"
       state: upgraded
+      check_upgrade: "{{ check_upgrade }}"
       timeout: "{{ upgrade_timeout }}"
     register: host_upgraded
 
   - name: Append host name to list of upgraded hosts
     set_fact:
       succeed_host_names: "{{ succeed_host_names }} + [ '{{ item.name }}' ]"
+    when: host_upgraded.changed
 
   rescue:
     - name: Report issues

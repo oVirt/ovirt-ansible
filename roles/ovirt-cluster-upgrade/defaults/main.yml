@@ -2,6 +2,7 @@
 stop_pinned_to_host_vms: false
 upgrade_timeout: 1200
 cluster_name: Default
+check_upgrade: false
 host_statuses:
   - up
 host_names:
