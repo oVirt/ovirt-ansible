@@ -106,8 +106,8 @@ engine_cafile: /etc/pki/ovirt-engine/ca.pem
 ```
 **Note:** If you prefer, these variables can be added directly to the playbook instead.
 
-4) Create your playbook. To simplify this, you can copy and modify an example in `/etc/ansible/roles/ovirt.ovirt-ansible-roles/examples` or `/usr/share/doc/ovirt-ansible-roles/` depending on the method used to install the roles:
-```
+4) Create your playbook. To simplify this, you can copy and modify an example in `/etc/ansible/roles/ovirt.ovirt-ansible-roles/examples` or `/usr/share/doc/ovirt-ansible-roles/examples` depending on the method used to install the roles:
+```yaml
 $ cat ovirt_infra.yml
 ---
 - name: oVirt infra
@@ -139,7 +139,7 @@ $ cat ovirt_infra.yml
     compatibility_version: 4.1
 
   roles:
-    - ovirt.ovirt-datacenters
+    - ovirt-datacenters
 
   post_tasks:
     - name: Logout from oVirt
