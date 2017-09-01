@@ -18,6 +18,7 @@ BuildArch:      noarch
 Url:            http://www.ovirt.org
 
 Requires: ansible >= 2.3.0
+Requires: python2-jmespath
 
 %description
 Collection of Ansible roles to ease the management and automation of the oVirt engine.
