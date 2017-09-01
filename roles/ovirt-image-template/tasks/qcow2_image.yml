@@ -3,6 +3,7 @@
   get_url:
     url: "{{ qcow_url }}"
     dest: "{{ image_path }}"
+    force: "{{ not image_cache_download }}"
   register: downloaded
   tags:
     - ovirt-template-image
@@ -101,6 +102,12 @@
       - ovirt-template-image
 
   always:
+    - name: Remove downloaded image
+      file:
+        path: "{{ image_path }}"
+        state: absent
+      when:  not image_cache_download
+
     - name: Remove vm
       ovirt_vms:
         auth: "{{ ovirt_auth }}"

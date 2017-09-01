@@ -1,5 +1,6 @@
 ---
 image_path: /tmp/ovirt_image_data
+image_cache_download: true
 template_cluster: Default
 template_name: mytemplate
 template_memory: 2GiB

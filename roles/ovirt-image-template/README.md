@@ -18,6 +18,7 @@ Role Variables
 |--------------------|-----------------------|----------------------------|
 | qcow_url           | UNDEF                 | The URL of the QCOW2 image. |
 | image_path         | /tmp/ovirt_image_data | Path where the QCOW2 image will be downloaded to. |
+| image_cache_download | true                | When set to false will delete image_path at the start and end of execution |
 | template_cluster   | Default               | Name of the cluster where template must be created. |
 | template_name      | mytemplate            | Name of the template. |
 | template_memory    | 2GiB                  | Amount of memory assigned to the template. |
