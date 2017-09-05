@@ -1,22 +1,17 @@
 galaxy_info:
   author: Ondra Machacek
-  description: Role to deploy oVirt hypervisor.
+  description: Role to fetch fatcs from oVirt host.
   company: Red Hat, Inc.
 
   license: Apache License 2.0
 
-  min_ansible_version: 2.3
+  min_ansible_version: 2.0
 
   platforms:
   - name: EL
     versions:
     - 7
-  - name: Fedora
-    versions:
-    - 25
 
   galaxy_tags: [ovirt, rhv, rhev, virtualization]
 
-dependencies:
-  - ovirt-host-deploy-facts
-  - ovirt-host-deploy-firewalld
+dependencies: []

@@ -1,0 +1,9 @@
+---
+- name: Fetch info about VDSM
+  command: bash -c "rpm -q vdsm --qf '%{VERSION}'"
+  changed_when: false
+  register: vdsm_version
+
+- name: Set facts
+  set_fact:
+    host_deploy_vdsm_version: "{{ vdsm_version.stdout }}"

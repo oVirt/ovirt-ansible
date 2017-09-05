@@ -1,15 +1,10 @@
 ---
-- name: Fetch info about VDSM
-  command: bash -c "rpm -q vdsm --qf '%{VERSION}'"
-  changed_when: false
-  register: vdsm_version
-
 - name: Check if VDSM version is supported for FirewallD
   fail:
-    msg: "VDSM version {{ vdsm_version.stdout }} is not supported for FirewallD."
+    msg: "VDSM version {{ host_deploy_vdsm_version }} is not supported for FirewallD."
   when:
     - "host_deploy_firewall_type == 'FIREWALLD'"
-    - "vdsm_version.stdout | version_compare('4.20', '<')"
+    - "host_deploy_vdsm_version | version_compare('4.20', '<')"
 
 - block:
     - name: Stop iptables service if running
@@ -68,4 +63,4 @@
   when:
     - "host_deploy_override_firewall"
     - "host_deploy_firewall_type == 'FIREWALLD'"
-    - "vdsm_version | version_compare('4.20', '>=')"
+    - "host_deploy_vdsm_version | version_compare('4.20', '>=')"
