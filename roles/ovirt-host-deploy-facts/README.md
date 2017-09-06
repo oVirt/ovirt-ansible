@@ -1,4 +1,4 @@
-oVirt host deploy - fatcs
+oVirt host deploy - facts
 =============================
 
 This role is used to fetch specific information from oVirt hosts and create a facts.
