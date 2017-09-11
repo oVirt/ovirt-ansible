@@ -1,4 +1,10 @@
 ---
+## https://github.com/ansible/ansible/issues/22397
+## Ansible 2.3 generates a WARNING when using {{ }} in defaults variables of role
+## this workarounds it until Ansible resolves the issue:
+- set_fact:
+    stop_non_migratable_vms: "{{ stop_non_migratable_vms }}"
+
 - block:
   - name: Login to oVirt
     ovirt_auth:
@@ -73,11 +79,11 @@
     - include: pinned_vms.yml
   
     # Update only those hosts that aren't in list of hosts were VMs are pinned
-    # or if stop_pinned_to_host_vms is enabled, which means we stop pinned VMs
+    # or if stop_non_migratable_vms is enabled, which means we stop pinned VMs
     - include: upgrade.yml
       with_items:
         - "{{ ovirt_hosts }}"
-      when: "item.id not in host_ids or stop_pinned_to_host_vms"
+      when: "item.id not in host_ids or stop_non_migratable_vms"
 
     when: ovirt_hosts | length > 0
     always:
@@ -92,6 +98,7 @@
         ovirt_vms:
           auth: "{{ ovirt_auth }}"
           name: "{{ item }}"
+        ignore_errors: yes
         with_items:
           - "{{ stopped_vms | default([]) }}"
   
@@ -99,9 +106,10 @@
         ovirt_vms:
           auth: "{{ ovirt_auth }}"
           name: "{{ item }}"
+        ignore_errors: yes
         with_items:
           - "{{ pinned_vms_names | default([]) }}"
-        when: "stop_pinned_to_host_vms"
+        when: "stop_non_migratable_vms"
   
       - name: Print info about host which was updated
         debug:
