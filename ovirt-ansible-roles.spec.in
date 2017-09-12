@@ -18,7 +18,7 @@ Group:          Virtualization/Management
 BuildArch:      noarch
 Url:            http://www.ovirt.org
 
-Requires: ansible >= 2.3.0
+Requires: ansible >= 2.3.1
 
 %description
 Collection of Ansible roles to ease the management and automation of the oVirt engine.
