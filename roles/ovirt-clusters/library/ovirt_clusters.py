@@ -465,7 +465,7 @@ class ClustersModule(BaseModule):
             equal(self.param('migration_compressed'), str(entity.migration.compressed)) and
             equal(self.param('serial_policy'), str(getattr(entity.serial_number, 'policy', None))) and
             equal(self.param('serial_policy_value'), getattr(entity.serial_number, 'value', None)) and
-            equal(self.param('scheduling_policy'), getattr(sched_policy, 'name', None)) and
+            equal(self.param('scheduling_policy'), getattr(self._connection.follow_link(entity.scheduling_policy), 'name', None)) and
             equal(self._get_policy_id(), getattr(migration_policy, 'id', None)) and
             equal(self._get_memory_policy(), entity.memory_policy.over_commit.percent) and
             equal(self.__get_minor(self.param('compatibility_version')), self.__get_minor(entity.version)) and
