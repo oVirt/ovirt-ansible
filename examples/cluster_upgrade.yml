@@ -12,7 +12,7 @@
     engine_url: https://ovirt.example.com/ovirt-engine/api
     engine_user: admin@internal
 
-    stop_pinned_to_host_vms: true
+    stop_non_migratable_vms: true
 
     host_statuses:
       - up
