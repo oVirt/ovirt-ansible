@@ -62,9 +62,8 @@
     ovirt_disks:
       auth: "{{ ovirt_auth }}"
       name: "{{ template_disk_name | default(template_name) }}"
-      interface: "{{ template_disk_format | default('virtio') }}"
-      size: "{{ template_disk_size}}"
-      format: "{{  template_disk_interface | default('cow') }}"
+      size: "{{ template_disk_size }}"
+      format: "{{ template_disk_format | default(omit) }}"
       image_path: "{{ image_path }}"
       storage_domain: "{{ template_disk_storage | default(disk_storage_domain.name) }}"
       force: "{{ ovirt_templates | length == 0 }}"
@@ -86,6 +85,7 @@
       disks:
         - id: "{{ ovirt_disk.id }}"
           bootable: true
+          interface: "{{ template_disk_interface }}"
       nics: "{{ template_nics }}"
     when: ovirt_templates | length == 0
     tags:
