@@ -41,7 +41,7 @@ The `profile` dictionary can contain following attributes:
 | root_password      | UNDEF                 | The root password of the virtual machine.                      |
 | high_availability  | UNDEF                 | Whether or not the node should be set highly available. |
 | storage_domain     | UNDEF                 | Name of the storage domain where all virtual machine disks should be created. Considered only when template is provided.|
-| state              | present               | Should the Virtual Machine be running/stopped/present/absent/suspended/next_run.|
+| state              | present               | Should the Virtual Machine be stopped, present or running.|
 
 The `disks` list can contain following attributes:
 
