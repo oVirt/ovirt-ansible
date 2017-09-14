@@ -30,6 +30,7 @@
         user_name: root
         root_password: "{{ item.profile.root_password | default(omit) }}"
       cloud_init_nics: "{{ item.profile.cloud_init_nics | default(omit) }}"
+      nics: "{{ item.profile.nics | default(omit) }}"
     with_items:
       - "{{ vms }}"
     changed_when: false
@@ -46,14 +47,14 @@
     retries: 40
     delay: 20
 
-  - name: Create VMs NICs
+  - name: Manage VMs NICs
     ovirt_nics:
       auth: "{{ ovirt_auth }}"
       vm: "{{ item.0.name }}"
       name: "{{ item.1.name | default(omit) }}"
       interface: "{{ item.1.interface | default(omit) }}"
       mac_address: "{{ item.1.mac_address | default(omit) }}"
-      profile: "{{ item.1.profile | default(omit) }}"
+      profile: "{{ item.1.profile_name | default(omit) }}"
       network: "{{ item.1.network | default(omit) }}" 
     with_subelements:
       - "{{ vms }}"

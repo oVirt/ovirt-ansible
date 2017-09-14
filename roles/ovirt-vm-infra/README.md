@@ -60,7 +60,7 @@ The item in `nics` list of `profile` dictionary can contain following attributes
 | Name           | Default value  |                                              |
 |----------------|----------------|----------------------------------------------| 
 | name           | UNDEF          | Name of the NIC. |
-| profile        | UNDEF          | Profile name where NIC should be attached. |
+| profile_name   | UNDEF          | Profile name where NIC should be attached. |
 | interface      | UNDEF          | Type of the network interface. One of following: virtio, e1000, rtl8139, default is virtio. |
 | mac_address    | UNDEF          | Custom MAC address of the network interface, by default it's obtained from MAC pool. |
 | network        | UNDEF          | Logical network to which the VM network interface should use, by default Empty network is used if network is not specified. |
