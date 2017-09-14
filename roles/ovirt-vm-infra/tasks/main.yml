@@ -21,6 +21,7 @@
       memory: "{{ item.profile.memory | default(omit) }}"
       cpu_cores: "{{ item.profile.cores | default(omit) }}"
       memory_guaranteed: "{{ item.profile.memory_guaranteed | default(omit) }}"
+      cpu_sockets: "{{ item.profile.sockets | default(omit) }}"
       high_availability: "{{ item.profile.high_availability | default(omit) }}"
       storage_domain: "{{ item.profile.storage_domain | default(omit) }}"
       cloud_init:
