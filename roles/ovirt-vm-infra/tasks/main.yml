@@ -29,7 +29,7 @@
         authorized_ssh_keys: "{{ item.profile.ssh_key | default('') }}"
         user_name: root
         root_password: "{{ item.profile.root_password | default(omit) }}"
-      cloud_init_nics: "{{ item.profile.nics | default([]) }}"
+      cloud_init_nics: "{{ item.profile.cloud_init_nics | default(omit) }}"
     with_items:
       - "{{ vms }}"
     changed_when: false
@@ -45,7 +45,22 @@
     until: job_result.finished
     retries: 40
     delay: 20
-  
+
+  - name: Create VMs NICs
+    ovirt_nics:
+      auth: "{{ ovirt_auth }}"
+      vm: "{{ item.0.name }}"
+      name: "{{ item.1.name | default(omit) }}"
+      interface: "{{ item.1.interface | default(omit) }}"
+      mac_address: "{{ item.1.mac_address | default(omit) }}"
+      profile: "{{ item.1.profile | default(omit) }}"
+      network: "{{ item.1.network | default(omit) }}" 
+    with_subelements:
+      - "{{ vms }}"
+      - profile.nics
+      - flags:
+        skip_missing: True
+
   - name: Create VMs disks
     ovirt_disks:
       auth: "{{ ovirt_auth }}"
