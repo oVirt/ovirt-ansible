@@ -33,6 +33,8 @@ The `profile` dictionary can contain following attributes:
 | cluster            | Default               | Name of the cluster where the virtual machine will be created. |
 | template           | Blank                 | Name of template that the virtual machine should be based on.   |
 | memory             | 2GiB                  | Amount of virtual machine memory.               |
+| memory_guaranteed  | UNDEF                 | Amount of minimal guaranteed memory of the Virtual Machine. Prefix uses IEC 60027-2 standard (for example 1GiB, 1024MiB).
+<i>memory_guaranteed</i> parameter can't be lower than <i>memory</i> parameter. |
 | cores              | 1                     | Number of CPU cores used by the the virtual machine.          |
 | disks              | UNDEF                 | Dictionary specifying the additional virtual machine disks.    |
 | nics               | UNDEF                 | List of dictionaries specifying the NICs of the virtual machine.   |
