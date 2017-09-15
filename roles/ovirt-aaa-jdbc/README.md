@@ -11,7 +11,7 @@ Requirements
 Role Variables
 --------------
 
-The `users` list can contain the following parameters:
+The items in `users` list can contain the following parameters:
 
 | Name          | Default value  | Description                           |
 |---------------|----------------|---------------------------------------|
@@ -21,7 +21,7 @@ The `users` list can contain the following parameters:
 | password      | UNDEF          | Password of the user.                  |
 | valid_to      | UNDEF          | Specifies the date that the account remains valid. |
 
-The `user_groups` list can contain the following parameters:
+The items in `user_groups` list can contain the following parameters:
 
 | Name          | Default value  | Description                           |
 |---------------|----------------|---------------------------------------|

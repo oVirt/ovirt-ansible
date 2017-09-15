@@ -24,7 +24,7 @@ Role Variables
 | vm_enforcing       | false               |  <ul><li>true - VM cannot start if it cannot satisfy the `vm_rule`.</li><li>false - VM will follow `vm_rule` with soft enforcement.</li></ul> |
 | vm_rule            | UNDEF               |  <ul><li>positive - all vms in this group try to run on the same host.</li><li>negative - all vms in this group try to run on separate hosts.</li><li>disabled - this affinity group does not take effect.</li></ul> |
 | vms                | UNDEF               |  List of VM's to be assigned to this affinity group. |
-| wait               | false               |  If true, the module should wait for the desired state. |
+| wait               | true                |  If true, the module will wait for the desired state. |
 
 Dependencies
 ------------
@@ -49,3 +49,4 @@ Example Playbook
         vms:
           - httpd_vm
           - postgresql-vm
+```
