@@ -31,21 +31,22 @@
         root_password: "{{ item.profile.root_password | default(omit) }}"
       cloud_init_nics: "{{ item.profile.cloud_init_nics | default(omit) }}"
       nics: "{{ item.profile.nics | default(omit) }}"
+      timeout: "{{ vm_infra_create_single_timeout }}"
     with_items:
       - "{{ vms }}"
     changed_when: false
-    async: 800
+    async: "{{ vm_infra_create_all_timeout }}"
     poll: 0
     register: all_vms
-  
+
   - name: Wait for VMs to be added
     async_status: "jid={{ item.ansible_job_id }}"
     register: job_result
     with_items:
       - "{{ all_vms.results }}"
     until: job_result.finished
-    retries: 40
-    delay: 20
+    retries: "{{ (vm_infra_create_all_timeout|int / vm_infra_create_poll_interval) | round|int + 1  }}"
+    delay: "{{ vm_infra_create_poll_interval }}"
 
   - name: Manage VMs NICs
     ovirt_nics:
@@ -102,11 +103,11 @@
     with_items:
       - "{{ vms }}"
     until: ovirt_vms | map(attribute='reported_devices') | list | first | length > 0
-    retries: 5
-    delay: 5
+    retries: "{{ vm_infra_wait_for_ip_retries }}"
+    delay: "{{ vm_infra_wait_for_ip_delay }}"
     when:
       - "wait_for_ip"
-      - "item.profile.state != 'stopped'"
+      - "item.profile.state | default('present') != 'stopped'"
 
   always:
     - name: Logout from oVirt
