@@ -2,7 +2,7 @@
 - name: Get hosts
   ovirt_hosts_facts:
     auth: "{{ ovirt_auth }}"
-    pattern: "name=*"
+    pattern: "{{ hosts | map(attribute='name') | map('regex_replace', '(.*)', 'name=\\1') | list | join(' or ') }} status=installfailed"
   tags:
     - hosts
     - reinstall
@@ -12,9 +12,10 @@
     auth: "{{ ovirt_auth }}"
     state: reinstalled
     name: "{{ item.name }}"
+    public_key: "{{ item.password is undefined }}"
+    password: "{{ item.password | default(omit) }}"
   with_items:
     - "{{ ovirt_hosts | default([]) }}"
-  when: item.status == 'install_failed'
   tags:
     - hosts
     - reinstall
@@ -25,14 +26,15 @@
     state: "{{ item.state | default(omit) }}"
     name: "{{ item.name }}"
     address: "{{ item.address }}"
-    password: "{{ item.password }}"
     cluster: "{{ item.cluster }}"
+    password: "{{ item.password | default(omit) }}"
+    public_key: "{{ item.public_key | default(omit) }}"
     override_iptables: true
-    timeout: "{{ item.timeout | default(1200) }}"
+    timeout: "{{ item.timeout | default(ovirt_hosts_add_timeout) }}"
     poll_interval: "{{ item.poll_interval | default(20) }}"
   with_items:
     - "{{ hosts | default([]) }}"
-  async: 1200
+  async: "{{ ovirt_hosts_max_timeout }}"
   poll: 0
   register: add_hosts
   tags:
@@ -46,5 +48,5 @@
   tags:
     - hosts
   until: job_result.finished
-  retries: 120
+  retries: "{{ ovirt_hosts_max_timeout // 20 }}"
   delay: 20
