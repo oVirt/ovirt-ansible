@@ -1,7 +1,7 @@
 Deploy ManageIQ in oVirt
 ==================================================
 
-The `ovirt.ovirt-manageiq` role downloads a ManageIQ/CloudForms QCOW image and deploys it into oVirt/Red Hat Virtualization (RHV).
+The `ovirt-manageiq` role downloads a ManageIQ/CloudForms QCOW image and deploys it into oVirt/Red Hat Virtualization (RHV).
 
 The role also enables you to create a virtual machine and attach the ManageIQ disk, then wait for the ManageIQ system to initialize, and register oVirt as an infrastructure provider.
 
@@ -35,6 +35,8 @@ QCOW variables:
 | Name          | Default value                                            |  Description                                                 |
 |---------------|----------------------------------------------------------|--------------------------------------------------------------|
 | miq_qcow_url  | http:////releases.manageiq.org/manageiq-ovirt-fine-1.qc2 | The URL of the ManageIQ QCOW image. |
+| miq_image_path | /tmp/ovirt_image_data | The path where the qcow2 image will be downloaded. |
+| miq_qcow_checksum | sha256:b3644e8ac75af9663d19372e21b8a0273d68e54bfd515<br/>518321d3102d08daebd | Checksum of the qcow2 image file. It's used to validate the downloaded file.  |
 
 Engine login variables:
 
@@ -72,13 +74,23 @@ Virtual machine NICs variables:
 |---------------------|-------------------|------------------------------------------------------|
 | miq_vm_nics         | {'name': 'nic1', 'profile_name': 'ovirtmgmt', 'interaface': 'virtio'} | Dictionary that defines the virtual machine network interfaces. |
 
-RHV provider variables:
+ManageIQ variables:
+
+| Name          | Default value     |  Description                                         |
+|---------------|-------------------|------------------------------------------------------|
+| miq_username  | admin             | The username used to login to ManageIQ. |
+| miq_password  | smartvm           | The password of user specific in username used to login to ManageIQ. |
+
+
+RHV provider and RHV metrics variables:
 
 | Name                  | Default value     |  Description                                         |
 |-----------------------|-------------------|------------------------------------------------------|
 | miq_rhv_provider_name | RHV provider      | Name of the RHV provider to be displayed in ManageIQ.|
+| metrics_fqdn          | UNDEF             | FQDN of the oVirt/RHV metrics.                       |
 | metrics_user          | UNDEF             | The user to connection to metrics server.            |
 | metrics_password      | UNDEF             | The password of the `metrics_user` .                 |
+| metrics_port          | UNDEF             | Port to connect to oVirt/RHV metrics.                |
 
 Dependencies
 ------------
@@ -96,9 +108,9 @@ Note that for passwords you should use Ansible vault.
       gather_facts: no
 
       vars:
-        ovirt_fqdn: ovirt-engine.example.com
-        ovirt_password: 123456
-        ovirt_username: admin@internal
+        engine_fqdn: ovirt-engine.example.com
+        engine_password: 123456
+        engine_username: admin@internal
 
         miq_vm_name: manageiq_fine
         miq_qcow_url: http://releases.manageiq.org/manageiq-ovirt-fine-1.qc2
@@ -108,7 +120,7 @@ Note that for passwords you should use Ansible vault.
           root_password: securepassword
 
       roles:
-        - ovirt.ovirt-manageiq
+        - ovirt-manageiq
 ```
 
 License
