@@ -16,6 +16,21 @@
     - ovirt-aaa-jdbc
     - users
 
+- name: Update users according to attributes
+  command: "{{ aaa_jdbc_prefix }}/ovirt-aaa-jdbc-tool user edit {{ item.name }} {% for attr, value in item['attributes'].iteritems() %} --attribute={{ attr }}='{{ value }}' {% endfor %}"
+  with_items:
+    - "{{ users | default([]) }}"
+  register: out_users
+  when: "item.attributes is defined"
+  changed_when: "out_users.rc != 5 and out_users.rc != 4"
+  # 5 == user already exists
+  # 4 == no user to be removed
+  # 0 == all OK
+  failed_when: "out_users.rc != 5 and out_users.rc != 0 and out_users.rc != 4"
+  tags:
+    - ovirt-aaa-jdbc
+    - users
+
 # FIXME: when user try to change the password which was already set in history
 # but is not current password we continue with changed=false:
 - name: Manage internal users passwords
