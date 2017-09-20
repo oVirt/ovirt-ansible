@@ -2,7 +2,9 @@
 - block:
 
   - name: Upgrade host
-    ovirt_hosts:
+    # TODO: Change when Ansible 2.4 is released:
+    # ovirt_hosts:
+    ovirt_hosts_internal_24:
       auth: "{{ ovirt_auth }}"
       name: "{{ item.name }}"
       state: upgraded

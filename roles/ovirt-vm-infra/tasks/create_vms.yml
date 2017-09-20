@@ -4,7 +4,9 @@
     pattern: "name={{ current_vm.name }}"
 
 - name: "Create VM {{current_vm.name }}"
-  ovirt_vms:
+  # TODO: Change when Ansible 2.4 is released:
+  # ovirt_vms:
+  ovirt_vms_24:
     auth: "{{ ovirt_auth }}"
     state: "{{ (ovirt_vms | length > 0) | ternary(current_vm.profile.state | default(omit), 'stopped') }}"
     name: "{{ current_vm.name }}"

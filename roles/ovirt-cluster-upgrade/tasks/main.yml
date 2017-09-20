@@ -40,7 +40,9 @@
         pattern: "name={{ cluster_name }}"
   
     - name: Get name of the original scheduling policy
-      ovirt_scheduling_policies_facts:
+      # TODO: Change when Ansible 2.4 is released:
+      # ovirt_scheduling_policies_facts:
+      ovirt_scheduling_policies_facts_internal_24:
         auth: "{{ ovirt_auth }}"
         id: "{{ ovirt_clusters[0].scheduling_policy.id }}"
   
@@ -54,11 +56,15 @@
         pattern: "cluster={{ cluster_name }}"
   
     - name: Get API facts
-      ovirt_api_facts:
+      # TODO: Change when Ansible 2.5 is released:
+      # ovirt_api_facts:
+      ovirt_api_facts_internal_25:
         auth: "{{ ovirt_auth }}"
 
     - name: Set in cluster upgrade policy
-      ovirt_clusters:
+      # TODO: Change when Ansible 2.4 is released:
+      # ovirt_clusters:
+      ovirt_clusters_internal_24:
         auth: "{{ ovirt_auth }}"
         name: "{{ cluster_name }}"
         scheduling_policy: cluster_maintenance
@@ -88,7 +94,9 @@
     when: ovirt_hosts | length > 0
     always:
       - name: Set original cluster policy
-        ovirt_clusters:
+        # TODO: Change when Ansible 2.4 is released:
+        # ovirt_clusters:
+        ovirt_clusters_internal_24:
           auth: "{{ ovirt_auth }}"
           name: "{{ cluster_name }}"
           scheduling_policy: "{{ cluster_scheduling_policy }}"
