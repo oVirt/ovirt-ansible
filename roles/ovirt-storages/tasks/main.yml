@@ -70,7 +70,9 @@
     - storages
 
 - name: Validate connections of storages
-  ovirt_storage_connections:
+  # TODO: Change when Ansible 2.4 is released:
+  # ovirt_storage_connections:
+  ovirt_storage_connections_internal_24:
     auth: "{{ ovirt_auth }}"
     id: "{{ item.1.id[0] }}"
     storage: "{{ item.0.name }}"
