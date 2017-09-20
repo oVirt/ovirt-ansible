@@ -8,7 +8,7 @@
   # ovirt_vms:
   ovirt_vms_24:
     auth: "{{ ovirt_auth }}"
-    state: "{{ (ovirt_vms | length > 0) | ternary(current_vm.profile.state | default(omit), 'stopped') }}"
+    state: "{{ (ovirt_vms | length > 0) | ternary('present', 'stopped') }}"
     name: "{{ current_vm.name }}"
     cluster: "{{ current_vm.profile.cluster | default(omit) }}"
     template: "{{ current_vm.profile.template | default(omit) }}"

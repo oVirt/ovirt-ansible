@@ -47,6 +47,8 @@ The `profile` dictionary can contain following attributes:
 | disks              | UNDEF                 | Dictionary specifying the additional virtual machine disks. See below for more detailed description. |
 | nics               | UNDEF                 | List of dictionaries specifying the NICs of the virtual machine. See below for more detailed description.   |
 | high_availability  | UNDEF                 | Whether or not the node should be set highly available. |
+| storage_domain     | UNDEF                 | Name of the storage domain where all virtual machine disks should be created. Considered only when template is provided.|
+| state              | running               | Should the Virtual Machine be stopped, present or running.|
 
 Following attributes of `profile` dictionary are deprecated and will be removed in ovirt-ansible-roles version 1.1,
 please use `cloud_init` parameter instead. Those parameters has precedence before `cloud_init` parameter to not

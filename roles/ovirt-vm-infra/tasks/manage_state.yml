@@ -2,7 +2,7 @@
 - name: Manage state
   ovirt_vms:
     auth: "{{ ovirt_auth }}"
-    state: "{{ current_vm.profile.state | default(omit) }}"
+    state: "{{ current_vm.profile.state | default('running') }}"
     name: "{{ current_vm.name }}"
     cloud_init:
       host_name: "{{ current_vm.name }}.{{ current_vm.profile.domain | default(omit) }}"
@@ -24,7 +24,7 @@
 - name: Manage state
   ovirt_vms:
     auth: "{{ ovirt_auth }}"
-    state: "{{ current_vm.profile.state | default(omit) }}"
+    state: "{{ current_vm.profile.state | default('running') }}"
     name: "{{ current_vm.name }}"
     cloud_init: "{{ current_vm.cloud_init | default(omit) }}"
     cloud_init_nics: "{{ current_vm.cloud_init_nics | default(omit) }}"
