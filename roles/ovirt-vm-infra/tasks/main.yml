@@ -48,37 +48,25 @@
       name: "{{ item.1.name | default(omit) }}"
       interface: "{{ item.1.interface | default(omit) }}"
       mac_address: "{{ item.1.mac_address | default(omit) }}"
-      profile: "{{ item.1.profile_name | default(omit) }}"
+      profile: "{{ item.1.profile | default(omit) }}"
       network: "{{ item.1.network | default(omit) }}" 
     with_subelements:
       - "{{ vms }}"
       - "profile.nics"
       - flags:
         skip_missing: true
-  
-  - name: Manage state
-    ovirt_vms:
-      auth: "{{ ovirt_auth }}"
-      state: "{{ item.profile.state | default(omit) }}"
-      name: "{{ item.name }}"
-      cloud_init:
-        host_name: "{{ item.name }}.{{ item.profile.domain | default(omit) }}"
-        authorized_ssh_keys: "{{ item.profile.ssh_key | default('') }}"
-        user_name: root
-        root_password: "{{ item.profile.root_password | default(omit) }}"
-      cloud_init_nics: "{{ item.profile.cloud_init_nics | default(omit) }}"
-      timeout: "{{ vm_infra_create_single_timeout }}"
-    with_items: "{{ vms }}"
-    changed_when: false
-    async: "{{ vm_infra_create_all_timeout }}"
-    poll: 0
-    register: all_vms
 
-  - name: Wait for VMs state
+  - name: Manage VMs state
+    include: manage_state.yml
+    with_items: "{{ vms }}"
+    loop_control:
+      loop_var: "current_vm"
+
+  - name: Wait for VMs to be started
+    no_log: "{{ not debug_vm_create }}"
     async_status: "jid={{ item.ansible_job_id }}"
     register: job_result
-    with_items:
-      - "{{ all_vms.results }}"
+    with_items: "{{ started_vms }}"
     until: job_result.finished
     retries: "{{ (vm_infra_create_all_timeout|int // vm_infra_create_poll_interval) + 1  }}"
     delay: "{{ vm_infra_create_poll_interval }}"

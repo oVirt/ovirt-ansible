@@ -30,6 +30,8 @@ The `vms` list can contain following attributes:
 |--------------------|-----------------------|--------------------------------------------| 
 | name               | UNDEF                 | Name of the virtual machine to create.     |
 | tag                | UNDEF                 | Name of the tag to assign to the virtual machine.  |
+| cloud_init         | UNDEF                 | Dictionary with values for Unix-like Virtual Machine initialization using cloud init. |
+| cloud_init_nics    | UNDEF                 | List of dictionaries representing network interafaces to be setup by cloud init. See below for more detailed description. |
 | profile            | UNDEF                 | Dictionary specifying the virtual machine hardware. See the table below.  |
 
 The `profile` dictionary can contain following attributes:
@@ -44,13 +46,19 @@ The `profile` dictionary can contain following attributes:
 | sockets            | UNDEF                 | Number of virtual CPUs sockets of the Virtual Machine.  |
 | disks              | UNDEF                 | Dictionary specifying the additional virtual machine disks. See below for more detailed description. |
 | nics               | UNDEF                 | List of dictionaries specifying the NICs of the virtual machine. See below for more detailed description.   |
-| ssh_key            | UNDEF                 | SSH key to be deployed to the virtual machine.                 |
-| domain             | UNDEF                 | The domain of the virtual machine.                         |
-| root_password      | UNDEF                 | The root password of the virtual machine.                      |
-| cloud_init_nics    | UNDEF                 | List of dictionaries representing network interafaces to be setup by cloud init. See below for more detailed description. |
 | high_availability  | UNDEF                 | Whether or not the node should be set highly available. |
 | storage_domain     | UNDEF                 | Name of the storage domain where all virtual machine disks should be created. Considered only when template is provided.|
 | state              | present               | Should the Virtual Machine be stopped, present or running.|
+
+Following attributes of `profile` dictionary are deprecated and will be removed in ovirt-ansible-roles version 1.1,
+please use `cloud_init` parameter instead. Those parameters has precedence before `cloud_init` parameter to not
+break backward compatibility, so please remove them when using `cloud_init`.
+
+| Name               | Default value         |                                               |
+|--------------------|-----------------------|-----------------------------------------------|
+| ssh_key            | UNDEF                 | SSH key to be deployed to the virtual machine.|
+| domain             | UNDEF                 | The domain of the virtual machine.            |
+| root_password      | UNDEF                 | The root password of the virtual machine.     |
 
 The item in `disks` list of `profile` dictionary can contain following attributes:
 
@@ -60,27 +68,24 @@ The item in `disks` list of `profile` dictionary can contain following attribute
 | name               | UNDEF          | The name of the additional disk.  |
 | storage_domain     | UNDEF          | The name of storage domain where disk should be created. |
 | interface          | UNDEF          | The interface of the disk. |
+| format             | UNDEF          | Specify format of the disk.  <ul><li>cow - If set, the disk will by created as sparse disk, so space will be allocated for the volume as needed. This format is also known as thin provisioned disks</li><li>raw - If set, disk space will be allocated right away. This format is also known as preallocated disks.</li></ul> |
+| bootable           | UNDEF          | True if the disk should be bootable. |
 
 The item in `nics` list of `profile` dictionary can contain following attributes:
 
-| Name           | Default value  |                                              |
-|----------------|----------------|----------------------------------------------| 
-| name           | UNDEF          | Name of the NIC. |
-| profile_name   | UNDEF          | Profile name where NIC should be attached. |
-| interface      | UNDEF          | Type of the network interface. One of following: virtio, e1000, rtl8139, default is virtio. |
-| mac_address    | UNDEF          | Custom MAC address of the network interface, by default it's obtained from MAC pool. |
-| network        | UNDEF          | Logical network to which the VM network interface should use, by default Empty network is used if network is not specified. |
-
-The item in `cloud_init_nics` list of `profile` dictionary can contain following attributes:
-
 | Name               | Default value  |                                              |
 |--------------------|----------------|----------------------------------------------| 
-| nic_boot_protocol  | UNDEF          | Set boot protocol of the network interface of Virtual Machine. Can be one of none, dhcp or static. |
-| nic_ip_address     | UNDEF          | If boot protocol is static, set this IP address to network interface of Virtual Machine.
-| nic_netmask        | UNDEF          | If boot protocol is static, set this netmask to network interface of Virtual Machine.
-| nic_gateway        | UNDEF          | If boot protocol is static, set this gateway to network interface of Virtual Machine.
-| nic_name           | UNDEF          | Set name to network interface of Virtual Machine.
-| nic_on_boot        | UNDEF          | If True network interface will be set to start on boot.
+| name               | UNDEF          | The name of the network interface.           |
+| interface          | UNDEF          | Type of the network interface.               |
+| mac_address        | UNDEF          | Custom MAC address of the network interface, by default it's obtained from MAC pool. |
+| network            | UNDEF          | Logical network which the VM network interface should use. If network is not specified, then Empty network is used. |
+| profile            | UNDEF          | Virtual network interface profile to be attached to VM network interface. |
+
+The item in `cloud_init` dictionary can contain all parameters documented
+in upstream Ansible documentation of [ovirt_vms](http://docs.ansible.com/ansible/latest/ovirt_vms_module.html) module.
+
+The item in `cloud_init_nics` list can contain all parameters documented
+in upstream Ansible documentation of [ovirt_vms](http://docs.ansible.com/ansible/latest/ovirt_vms_module.html) module.
 
 Dependencies
 ------------
