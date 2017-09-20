@@ -4,7 +4,6 @@
     pattern: "name={{ current_vm.name }}"
 
 - name: "Create VM {{current_vm.name }}"
-  no_log: "{{ not debug_vm_create }}"
   ovirt_vms:
     auth: "{{ ovirt_auth }}"
     state: "{{ (ovirt_vms | length > 0) | ternary(current_vm.profile.state | default(omit), 'stopped') }}"
