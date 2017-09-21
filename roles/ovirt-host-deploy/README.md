@@ -16,6 +16,9 @@ No.
 Dependencies
 ------------
 
+ * ovirt-host-deploy-facts
+ * ovirt-provider-ovn-driver
+ * ovirt-host-deploy-libvirt-guests
  * ovirt-host-deploy-firewalld
 
 Example Playbook
