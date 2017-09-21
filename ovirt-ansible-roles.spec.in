@@ -42,6 +42,21 @@ make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_dat
 %license %{_docdir}/%{name}/LICENSE
 
 %changelog
+* Thu Sep 21 2017 Ondra Machacek <omachace@redhat.com> - 1.0.4-1
+- Fix ovirt-image-template parameters. rhbz #1489454
+- Improve shutdown of non-migrable VMs. rhbz #1488526
+- Require ansible 2.3.1.
+- Vm infra fix defaults. rhbz #1489893
+- Add memory_guaranteed parameter to ovirt-vm-infra. rhbz #1490852
+- Add sockets variable to ovirt-vm-infra role. rhbz #1489888
+- Add nics to ovirt-vm-infra role. rhbz #1490934
+- Add timeouts for ovirt-vm-infra role. #1490838
+- Improve reinstalling of the hosts.
+- Don't hot-plug disk. rhbz #1490930
+- Don't run with cloud-init if not specified.
+- Add suffix to modules with bug fixes. rhbz #1487082
+- Rebase ovirt_vms module with Ansible fix #27382. rhbz #1491010
+
 * Fri Sep 1 2017 Ondra Machacek <omachace@redhat.com> - 1.0.3-1
 - Fix REAME.md getting started instruction.
 - Add dependency for python2-jmespath package.
