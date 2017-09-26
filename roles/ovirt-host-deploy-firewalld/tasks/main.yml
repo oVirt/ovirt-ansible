@@ -14,11 +14,6 @@
         enabled: no
       ignore_errors: yes
 
-    - name: Remove iptables-service if exists
-      package:
-        name: iptables-services
-        state: absent
-
     - name: Check if firewalld is installed
       package:
         name: firewalld
