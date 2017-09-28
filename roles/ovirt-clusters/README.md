@@ -39,6 +39,8 @@ The items in `clusters` list can contain the following parameters:
 | fence_enabled                     | UNDEF               | If True, enables fencing on the cluster. |
 | fence_skip_if_connectivity_broken | UNDEF               | If True, fencing will be temporarily disabled if the percentage of hosts in the cluster that are experiencing connectivity issues is greater than or equal to the defined threshold. |
 | fence_skip_if_sd_active           | UNDEF               | If True, any hosts in the cluster that are Non Responsive and still connected to storage will not be fenced. |
+| mac_pool                          | UNDEF               | Mac pool name. |
+
 
 More information about the parameters can be found in the [Ansible documentation](http://docs.ansible.com/ansible/ovirt_cluster_module.html).
 
@@ -93,6 +95,7 @@ Example Playbook
      - name: production
        cpu_type: Intel Conroe Family
        profile: production
+       mac_pool: production_mac_pools
 
   roles:
     - ovirt-clusters
