@@ -22,6 +22,7 @@
     ovirt_hosts_facts:
       auth: "{{ ovirt_auth }}"
       pattern: "cluster={{ cluster_name | mandatory }} {{ check_upgrade | ternary('', 'update_available=true') }} {{ host_names | map('regex_replace', '(.*)', 'name=\\1') | list | join(' or ') }} {{ host_statuses | map('regex_replace', '(.*)', 'status=\\1') | list | join(' or ') }}"
+    check_mode: no
   
   - name: Check if there are hosts to be updated
     debug:
@@ -38,6 +39,7 @@
       ovirt_clusters_facts:
         auth: "{{ ovirt_auth }}"
         pattern: "name={{ cluster_name }}"
+      check_mode: no
   
     - name: Get name of the original scheduling policy
       # TODO: Change when Ansible 2.4 is released:
@@ -45,6 +47,7 @@
       ovirt_scheduling_policies_facts_internal_24:
         auth: "{{ ovirt_auth }}"
         id: "{{ ovirt_clusters[0].scheduling_policy.id }}"
+      check_mode: no
   
     - name: Remember the cluster scheduling policy
       set_fact:
@@ -54,12 +57,14 @@
       ovirt_vms_facts:
         auth: "{{ ovirt_auth }}"
         pattern: "cluster={{ cluster_name }}"
+      check_mode: no
   
     - name: Get API facts
       # TODO: Change when Ansible 2.5 is released:
       # ovirt_api_facts:
       ovirt_api_facts_internal_25:
         auth: "{{ ovirt_auth }}"
+      check_mode: no
 
     - name: Set in cluster upgrade policy
       # TODO: Change when Ansible 2.4 is released:
