@@ -1,8 +1,6 @@
 ---
 - name: Add clusters
-  # TODO: Change when Ansible 2.4 is released:
-  # ovirt_clusters:
-  ovirt_clusters_internal_24:
+  ovirt_clusters:
     auth: "{{ ovirt_auth }}"
     state: "{{ item.state | default(omit) }}"
     name: "{{ item.name }}"
