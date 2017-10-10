@@ -13,7 +13,7 @@
     ksm_numa: "{{ item.ksm_numa | default(profiles[item.profile | default('_')].ksm_numa) | default(omit) }}"
     host_reason: "{{ item.host_reason | default(profiles[item.profile | default('_')].host_reason) | default(omit) }}"
     vm_reason: "{{ item.vm_reason | default(profiles[item.profile | default('_')].vm_reason) | default(omit) }}"
-    memory_policy: "{{ item.memory_policy | default(profiles[item.profile | default('_')].memory_policy) | default('disabled') }}"
+    memory_policy: "{{ item.memory_policy | default(item.performance_preset) | default(profiles[item.profile | default('_')].memory_policy) | default(profiles[item.profile | default('_')].performance_preset) | default('disabled') }}"
     migration_policy: "{{ item.migration_policy | default(profiles[item.profile | default('_')].migration_policy) | default(omit) }}"
     scheduling_policy: "{{ item.scheduling_policy | default(profiles[item.profile | default('_')].scheduling_policy) | default(omit) }}"
     ha_reservation: "{{ item.ha_reservation | default(profiles[item.profile | default('_')].ha_reservation) | default(omit) }}"
