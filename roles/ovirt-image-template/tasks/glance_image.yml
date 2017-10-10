@@ -31,6 +31,7 @@
       auth: "{{ ovirt_auth }}"
       state: imported
       name: "{{ template_name }}"
+      template_image_disk_name: "{{ template_disk_name | default(omit) }}"
       image_provider: "{{ glance_image_provider }}"
       image_disk: "{{ glance_image }}"
       storage_domain: "{{ template_disk_storage | default(disk_storage_domain.name) }}"
