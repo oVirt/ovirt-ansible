@@ -7,6 +7,23 @@
     data_center: "{{ data_center_name }}"
     cpu_type: "{{ item.cpu_type | default('Intel Conroe Family') }}"
     compatibility_version: "{{ compatibility_version }}"
+    mac_pool:  "{{ item.mac_pool | default(omit) }}"
+    comment: "{{ item.comment | default(omit) }}"
+    fence_connectivity_threshold: "{{ item.fence_connectivity_threshold | default(omit) }}"
+    gluster: "{{ item.gluster | default(omit) }}"
+    migration_bandwidth: "{{ item.migration_bandwidth | default(omit) }}"
+    migration_bandwidth_limit: "{{ item.migration_bandwidth_limit | default(omit) }}"
+    network: "{{ item.network | default(omit) }}"
+    resilience_policy: "{{ item.resilience_policy | default(omit) }}"
+    rng_sources: "{{ item.rng_sources | default(omit) }}"
+    serial_policy: "{{ item.serial_policy | default(omit) }}"
+    serial_policy_value: "{{ item.serial_policy_value | default(omit) }}"
+    spice_proxy: "{{ item.spice_proxy | default(omit) }}"
+    switch_type: "{{ item.switch_type | default(omit) }}"
+    threads_as_cores: "{{ item.threads_as_cores | default(omit) }}"
+    trusted_service: "{{ item.trusted_service | default(omit) }}"
+    virt: "{{ item.virt | default(omit) }}"
+    # Parameters part of profile:
     ballooning: "{{ item.ballooning | default(profiles[item.profile | default('_')].ballooning) | default(omit) }}"
     description: "{{ item.description| default(profiles[item.profile | default('_')].description) | default(omit) }}"
     ksm: "{{ item.ksm | default(profiles[item.profile | default('_')].ksm) | default(omit) }}"
@@ -20,7 +37,7 @@
     fence_enabled: "{{ item.fence_enabled | default(profiles[item.profile | default('_')].fence_enabled) | default(omit) }}"
     fence_skip_if_connectivity_broken: "{{ item.fence_skip_if_connectivity_broken | default(profiles[item.profile | default('_')].fence_skip_if_connectivity_broken) | default(omit) }}"
     fence_skip_if_sd_active: "{{ item.fence_skip_if_sd_active | default(profiles[item.profile | default('_')].fence_skip_if_sd_active) | default(omit) }}"
-    mac_pool:  "{{ item.mac_pool | default(omit) }}"
+
   with_items:
     - "{{ clusters | default([]) }}"
   tags:

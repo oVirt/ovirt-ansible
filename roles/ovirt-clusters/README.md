@@ -37,10 +37,24 @@ The items in `clusters` list can contain the following parameters:
 | scheduling_policy                 | UNDEF               | The scheduling policy used by the cluster. |
 | ha_reservation                    | UNDEF               | If True enable the oVirt/RHV to monitor cluster capacity for highly available virtual machines. |
 | fence_enabled                     | UNDEF               | If True, enables fencing on the cluster. |
+| fence_connectivity_threshold | UNDEF          | The threshold used by <i>fence_skip_if_connectivity_broken</i>. |
 | fence_skip_if_connectivity_broken | UNDEF               | If True, fencing will be temporarily disabled if the percentage of hosts in the cluster that are experiencing connectivity issues is greater than or equal to the defined threshold. |
 | fence_skip_if_sd_active           | UNDEF               | If True, any hosts in the cluster that are Non Responsive and still connected to storage will not be fenced. |
 | mac_pool                          | UNDEF               | Mac pool name. |
-
+| comment               | UNDEF                 | Comment of the cluster. |
+| migration_bandwidth          | UNDEF          | The bandwidth settings define the maximum bandwidth of both outgoing and incoming migrations per host.<br/>Following bandwidth options are supported:<br/><ul><li>auto - Bandwidth is copied from the rate limit [Mbps] setting in the data center host network QoS.</li><li>hypervisor_default - Bandwidth is controlled by local VDSM setting on sending host.</li><li>custom - Defined by user (in Mbps).</li></ul> |
+| migration_bandwidth_limit    | UNDEF          | Set the custom migration bandwidth limit. |
+| network             | UNDEF                   | Management network of cluster to access cluster hosts. |
+| resilience_policy   | UNDEF                   | The resilience policy defines how the virtual machines are prioritized in the migration.<br/>Following values are supported:<br/><ul><li>do_not_migrate - Prevents virtual machines from being migrated.</li><li>migrate - Migrates all virtual machines in order of their defined priority.</li><li>migrate_highly_available - Migrates only highly available virtual machines to prevent overloading other hosts.</li></ul> |
+| rng_sources         | UNDEF                   | List that specify the random number generator devices that all hosts in the cluster will use. Supported generators are: <i>hwrng</i> and <i>random</i>. |
+| serial_policy       | UNDEF                   | Specify a serial number policy for the virtual machines in the cluster.<br/>Following options are supported:<br/><ul><li>vm - Sets the virtual machine's UUID as its serial number.</li><li>host - Sets the host's UUID as the virtual machine's serial number.</li><li>custom - Allows you to specify a custom serial number in serial_policy_value.</li></ul> |
+| serial_policy_value | UNDEF                   | Allows you to specify a custom serial number. This parameter is used only when <i>serial_policy</i> is custom. |
+| spice_proxy         | UNDEF                   | The proxy by which the SPICE client will connect to virtual machines. The address must be in the following format: protocol://[host]:[port] |
+| switch_type         | UNDEF                   | Type of switch to be used by all networks in given cluster. Either legacy which is using linux brigde or ovs using Open vSwitch. |
+| threads_as_cores    | UNDEF                   | If True the exposed host threads would be treated as cores which can be utilized by virtual machines. |
+| trusted_service     | UNDEF                   | If True enable integration with an OpenAttestation server.|
+| virt                | UNDEF                   | If True, hosts in this cluster will be used to run virtual machines. Default is true. |
+| gluster                      | UNDEF          | If True, hosts in this cluster will be used as Gluster Storage server nodes, and not for running virtual machines. |
 
 More information about the parameters can be found in the [Ansible documentation](http://docs.ansible.com/ansible/ovirt_cluster_module.html).
 
