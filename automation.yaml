@@ -1,3 +1,6 @@
 distros:
   - fc24
   - el7
+release_branches:
+  master: ovirt-master
+  ovirt-ansible-1.0: ovirt-4.1
