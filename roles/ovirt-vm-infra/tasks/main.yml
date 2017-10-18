@@ -85,7 +85,7 @@
   - name: Apply any Affinity Groups
     include_role:
       name: ovirt-affinity-groups
-  
+
   - name: Wait for VMs IP
     ovirt_vms_facts:
       auth: "{{ ovirt_auth }}"
@@ -94,10 +94,12 @@
       nested_attributes: ips
     with_items:
       - "{{ vms }}"
-    until: ovirt_vms | map(attribute='reported_devices') | list | first | length > 0
+    until: "ovirt_vms | first | json_query(query) | length > 0"
     retries: "{{ vm_infra_wait_for_ip_retries }}"
     delay: "{{ vm_infra_wait_for_ip_delay }}"
     when: "wait_for_ip"
+    vars:
+      query: "reported_devices[*].ips[*].address"
 
   always:
     - name: Logout from oVirt
