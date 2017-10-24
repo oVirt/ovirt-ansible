@@ -45,6 +45,23 @@ make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_dat
 %license %{_docdir}/%{name}/LICENSE
 
 %changelog
+* Tue Oct 24 2017 Ondra Machacek <omachace@redhat.com> - 1.1.1-1
+- ovirt-cluster-upgrade: Don't run check_for upgrade if not needed (#64)
+- ovirt-image-template: add image_cache_download option (#63)
+- Add new ovirt-host-deploy-facts role and use it in ovirt-host-deploy-firewalld role (#71)
+- oVirt provider OVN driver (#73)
+- Improve shutdown of non-migrable VMs (#76)
+- Fix ovirt-image-template parameters (#78)
+- Vm infra fix defaults (#80)
+- Add memory_guaranteed parameter to ovirt-vm-infra (#81)
+- Add sockets variable to ovirt-vm-infra role
+- Add nics to ovirt-vm-infra role (#83)
+- Add timeouts for ovirt-vm-infra role (#82)
+- Libvirt guests (#62)
+- Require Ansible 2.4
+- ovirt-ansible: roles: Add role to cleanup datacenter (#84)
+- Add host-upgrade role (#106)
+
 * Tue Aug 29 2017 Ondra Machacek <omachace@redhat.com> - 1.1.0-1
 - ovirt-image-template: add glance as disk source (#30)
 - ovirt-vm-infra: allow set state and sd for vm (#37)
