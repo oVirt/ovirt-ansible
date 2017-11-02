@@ -1,8 +1,9 @@
 host_deploy_firewalld_rules:
   ## Service definition:
-  - service: rpc-bind
-  - service: snmp
   - service: cockpit
+  - service: libvirt-tls
+  - service: snmp
+  - service: vdsm
 
   ## Port definition:
   # ovirt-imageio-daemon

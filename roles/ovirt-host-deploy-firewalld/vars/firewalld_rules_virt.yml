@@ -1,8 +1,6 @@
 host_deploy_firewalld_rules:
   ## Service definition:
-  - service: libvirt-tls
   - service: ovirt-vmconsole
-  - service: vdsm
 
   ## Port definition:
   # OVN tunnels
