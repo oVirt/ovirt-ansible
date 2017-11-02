@@ -37,7 +37,7 @@
       vars:
         firewald_rules_file: firewalld_rules_{{ outer_item.0 }}.yml
     
-      when: outer_item.1
+      when: outer_item.1|bool
       with_together:
         - ["common", "virt", "gluster"]
         - [true, "{{ host_deploy_virt_enabled }}", "{{ host_deploy_gluster_enabled }}"]
@@ -49,7 +49,7 @@
       vars:
         firewald_rules_file: firewalld_rules_{{ outer_item.0 }}_{{ host_deploy_cluster_version }}.yml
     
-      when: outer_item.1
+      when: outer_item.1|bool
       with_together:
         - ["common", "virt", "gluster"]
         - [true, "{{ host_deploy_virt_enabled }}", "{{ host_deploy_gluster_enabled }}"]
