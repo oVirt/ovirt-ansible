@@ -9,6 +9,7 @@
   yum:
     name: ovirt-host
     state: latest
+    update_cache: yes
   tags:
     - updatecheck
 
@@ -16,5 +17,6 @@
   yum:
     name: '*'
     state: latest
+    update_cache: yes
   tags:
     - updatecheck
