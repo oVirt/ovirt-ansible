@@ -1,13 +1,3 @@
-%global ansible_roles_dir ansible/roles
-%global ansible_hostdeploy_post_tasks ovirt-host-deploy-post-tasks.yml
-
-%global make_common_opts \\\
-	PREFIX=%{_prefix} \\\
-	SYSCONF_DIR=%{_sysconfdir} \\\
-	DATAROOT_DIR=%{_datadir} \\\
-	LOCALSTATE_DIR=%{_localstatedir} \\\
-	BUILD_VALIDATION=0
-
 Name: @PACKAGE_NAME@
 Summary: Set of Ansible roles for oVirt management
 Version: @RPM_VERSION@
@@ -19,6 +9,11 @@ BuildArch:      noarch
 Url:            http://www.ovirt.org
 
 Requires: ansible >= 2.4
+Requires: ovirt-ansible-cluster-upgrade >= 1.1.0
+Requires: ovirt-ansible-image-template >= 1.1.0
+Requires: ovirt-ansible-infra >= 1.1.0
+Requires: ovirt-ansible-manageiq >= 1.1.0
+Requires: ovirt-ansible-vm-infra >= 1.1.0
 
 %description
 Collection of Ansible roles to ease the management and automation of the oVirt engine.
@@ -27,24 +22,19 @@ Collection of Ansible roles to ease the management and automation of the oVirt e
 %setup -c -q
 
 %build
-make %{make_common_opts} dist
 
 %install
-make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_datadir}/%{ansible_roles_dir}" POST_TASKS_FILE=%{ansible_hostdeploy_post_tasks}
 
 %files
-%{_datadir}/%{ansible_roles_dir}
-%{_datadir}/%{name}/playbooks
+%doc examples/
+%doc README.md
 
-%{_sysconfdir}/%{name}/%{ansible_hostdeploy_post_tasks}
-
-%doc %{_docdir}/%{name}/README.md
-%doc %{_docdir}/%{name}/examples/
-%doc %{_docdir}/%{ansible_roles_dir}/
-
-%license %{_docdir}/%{name}/LICENSE
+%license LICENSE
 
 %changelog
+* Mon Nov 27 2017 Ondra Machacek <omachace@redhat.com> - 1.1.2-1
+- Split roles into multiple RPM packages.
+
 * Tue Oct 24 2017 Ondra Machacek <omachace@redhat.com> - 1.1.1-1
 - ovirt-cluster-upgrade: Don't run check_for upgrade if not needed (#64)
 - ovirt-image-template: add image_cache_download option (#63)

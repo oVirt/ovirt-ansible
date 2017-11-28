@@ -22,4 +22,4 @@
     template_disk_storage: nfs
 
   roles:
-    - ovirt-image-template
+    - oVirt.image-template

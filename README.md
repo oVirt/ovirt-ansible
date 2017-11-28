@@ -4,39 +4,14 @@
 
 oVirt maintains multiple Ansible roles that can be deployed to easily configure and manage various parts of the oVirt infrastructure. Ansible roles provide a method of modularizing your Ansible code, in other words; it enables you to break up large playbooks into smaller reusable files. This enables you to have a separate role for each component of the infrustructure, and allows you to reuse and share roles with other users. For more information about roles, see [Creating Reusable Playbooks] in the Ansible Documentation.
 
-The oVirt roles can be divided into two types of roles: Logical roles and Component roles.
+Currently we have implemented following Ansible roles:
 
-## Logical Roles
+* [oVirt.cluster-upgrade]
+* [oVirt.infra]
+* [oVirt.image-template]
+* [oVirt.manageiq]
+* [oVirt.vm-infra]
 
-Logical roles are used to group component roles, or implement specific scenarios on top of
-oVirt components.
-
-* [ovirt-cluster-upgrade]
-* [ovirt-host-deploy]
-* [ovirt-infra]
-* [ovirt-image-template]
-* [ovirt-manageiq]
-* [ovirt-vm-infra]
-
-## Component Roles
-
-Component roles enable you to manage the lifecycle of a specific oVirt component.
-
-The [ovirt-infra] logical role implements the following helper component roles:
-
- * [ovirt-aaa-jdbc]
- * [ovirt-clusters]
- * [ovirt-datacenters]
- * [ovirt-host-deploy-firewalld]
- * [ovirt-hosts]
- * [ovirt-networks]
- * [ovirt-permissions]
- * [ovirt-storages]
-
-The [ovirt-vm-infra] role includes the following helper component role:
-
- * [ovirt-affinity-groups]
- 
 ## Installing the oVirt Roles
 
 There are multiple methods to install the Ansible roles on your Ansible server.
@@ -47,38 +22,50 @@ __Note:__ You must have the official oVirt repository enabled. For more informat
 
 The Ansible roles are packaged into an RPM file that can be installed from the command line.
 
-Run the following command:
+Run the following command to install all roles:
 ```
 # yum install ovirt-ansible-roles 
+```
+Run the following command to install specific role:
+```
+# yum install ovirt-ansible-infra
+```
+To search all available roles you can execute following command:
+```
+# yum search ovirt-ansible
 ```
 By default the roles will be installed to `/usr/share/ansible/roles`.
 
 The structure of the ovirt-ansible-roles package is as follows:
 *    `/usr/share/ansible/roles` - stores the roles.
+*    `/usr/share/ansible/roles/{role_name}` - stores the specific role.
 *    `/usr/share/doc/ovirt-ansible-roles/` - stores the examples, a basic overview and the licence.
-*    `/usr/share/doc/ansible/roles/{role_name}` - stores the documentation specific to the role.
+*    `/usr/share/doc/{role_name}` - stores the documentation and examples specific to the role.
 
 ### Installing using Galaxy
 
 Ansible provides a command line utility to install Roles directory from the Galaxy Repository. See the [Galaxy] website for more information about Galaxy.
 
-To install the role using Galaxy, run the following from the command line:
+To install the roles using Galaxy, run the following from the command line:
 ```
-# ansible-galaxy install ovirt.ovirt-ansible-roles
+# ansible-galaxy install oVirt.ovirt-ansible-roles
 ```
+To install the specific role using Galaxy, run the following from the command line:
+```
+# ansible-galaxy install oVirt.infra
+```
+All roles are available under [oVirt organization] on Ansible Galaxy.
+
 By default the roles will be installed to `/etc/ansible/roles`.
 
 The structure of ovirt.ovirt-ansible-roles is as follows:
-* `/etc/ansible/roles/ovirt.ovirt-ansible-roles/roles` - stores the roles.
-* `/etc/ansible/roles/ovirt.ovirt-ansible-roles/examples` - stores the examples, a basic overview and the licence.
-* `/etc/ansible/roles/ovirt.ovirt-ansible-roles/roles/{role_name}` - stores the documentation specific to the role.
+* `/etc/ansible/roles/` - stores the roles.
+* `/etc/ansible/roles/{role_name}` - stores the specifc role.
+* `/etc/ansible/roles/{role_name}/examples` - stores the examples, a basic overview
 
 ## Getting Started
 
 This section will guide you through creating and running your playbook against the engine.
-
-By default, Ansible only searches for roles in the `/etc/ansible/roles/` directory and your current working directory. To change the directory where Ansible looks for roles, modify the `roles_path` option of the `[defaults]` section in the `ansible.cfg` configuration file. The default location of this file is `/etc/ansible/ansible.cfg`. You may need to update the `roles_path` option if you installed the roles with the package.
-
 The following example connects to the engine on the local host and creates a new data center. The current working directory is `/tmp`.
 
 **Note:** Ensure you have Python SDK installed on the machine running the playbook.
@@ -136,10 +123,10 @@ $ cat ovirt_infra.yml
     data_center_name: mydatacenter
     data_center_description: mydatacenter
     data_center_local: false
-    compatibility_version: 4.1
+    compatibility_version: 4.2
 
   roles:
-    - ovirt-datacenters
+    - oVirt.infra
 
   post_tasks:
     - name: Logout from oVirt
@@ -156,21 +143,12 @@ $ ansible-playbook --ask-vault-pass ovirt_infra.yml
 ```
 After the ansible-playbook playbook completes you will have a new data center named `mydatacenter`.
 
-[ovirt-infra]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-infra/README.md
-[ovirt-image-template]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-image-template/README.md
-[ovirt-vm-infra]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-vm-infra/README.md
-[ovirt-aaa-jdbc]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-aaa-jdbc/README.md
-[ovirt-clusters]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-clusters/README.md
-[ovirt-datacenters]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-datacenters/README.md
-[ovirt-hosts]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-hosts/README.md
-[ovirt-networks]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-networks/README.md
-[ovirt-permissions]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-permissions/README.md
-[ovirt-storages]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-storages/README.md
-[ovirt-cluster-upgrade]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-cluster-upgrade/README.md
-[ovirt-manageiq]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-manageiq/README.md
-[ovirt-affinity-groups]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-affinity-groups/README.md
-[ovirt-host-deploy]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-host-deploy/README.md
-[ovirt-host-deploy-firewalld]: https://github.com/oVirt/ovirt-ansible/blob/master/roles/ovirt-host-deploy-firewalld/README.md
+[oVirt.infra]: https://github.com/oVirt/ovirt-ansible-infra/blob/master/README.md
+[oVirt.image-template]: https://github.com/oVirt/ovirt-ansible-image-template/blob/master/README.md
+[oVirt.vm-infra]: https://github.com/oVirt/ovirt-ansible-vm-infra/blob/master/README.md 
+[oVirt.cluster-upgrade]: https://github.com/oVirt/ovirt-ansible-cluster-upgrade/blob/master/README.md
+[oVirt.manageiq]: https://github.com/oVirt/ovirt-ansible-manageiq/blob/master/README.md
 [Creating Reusable Playbooks]: http://docs.ansible.com/ansible/latest/playbooks_reuse.html
 [oVirt Deployment Options]: https://www.ovirt.org/download/
 [Galaxy]: https://galaxy.ansible.com/
+[oVirt organization]: https://galaxy.ansible.com/oVirt/

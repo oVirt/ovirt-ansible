@@ -60,4 +60,4 @@
           - postgresql-vm-1
 
   roles:
-    - ovirt-vm-infra
+    - oVirt.vm-infra

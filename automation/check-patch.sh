@@ -4,7 +4,8 @@
 rm -rf output
 rm -f ./*tar.gz
 
-make dist
+# Get the tarball
+./build.sh dist
 
 # create the src.rpm
 rpmbuild \

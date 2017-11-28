@@ -18,7 +18,7 @@ addons:
       - python-pip
 
 install:
-  - pip install tox ansible docker-py
+  - pip install tox ansible docker-py yamllint
 
   # Check ansible version
   - ansible --version

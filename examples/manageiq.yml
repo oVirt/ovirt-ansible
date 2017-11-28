@@ -20,4 +20,4 @@
 
 
   roles:
-    - ovirt-manageiq
+    - oVirt.manageiq

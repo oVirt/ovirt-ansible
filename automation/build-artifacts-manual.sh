@@ -4,7 +4,8 @@
 rm -rf output
 make clean
 
-make dist
+# Get the tarball
+./build.sh dist
 
 # create the src.rpm, assuming the tarball is in the project's directory
 rpmbuild \
