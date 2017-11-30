@@ -15,6 +15,8 @@ Requires: ovirt-ansible-infra >= 1.1.0
 Requires: ovirt-ansible-manageiq >= 1.1.0
 Requires: ovirt-ansible-vm-infra >= 1.1.0
 
+Obsoletes: ovirt-ansible-roles <= 1.1.1
+
 %description
 Collection of Ansible roles to ease the management and automation of the oVirt engine.
 
