@@ -10,12 +10,13 @@ Url:            http://www.ovirt.org
 
 Requires: ansible >= 2.4
 Requires: ovirt-ansible-cluster-upgrade >= 1.1.0
+Requires: ovirt-ansible-disaster-recovery >= 0.1
+Requires: ovirt-ansible-engine-setup >= 1.1.0
 Requires: ovirt-ansible-image-template >= 1.1.0
 Requires: ovirt-ansible-infra >= 1.1.0
 Requires: ovirt-ansible-manageiq >= 1.1.0
+Requires: ovirt-ansible-repositories >= 1.1.0
 Requires: ovirt-ansible-vm-infra >= 1.1.0
-
-Obsoletes: ovirt-ansible-roles <= 1.1.1
 
 %description
 Collection of Ansible roles to ease the management and automation of the oVirt engine.
@@ -34,6 +35,9 @@ Collection of Ansible roles to ease the management and automation of the oVirt e
 %license LICENSE
 
 %changelog
+* Wed Jan 17 2018 Ondra Machacek <omachace@redhat.com> - 1.1.3-1
+- Add requirment for new roles.
+
 * Mon Nov 27 2017 Ondra Machacek <omachace@redhat.com> - 1.1.2-1
 - Split roles into multiple RPM packages.
 
