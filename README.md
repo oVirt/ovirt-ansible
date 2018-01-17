@@ -7,9 +7,12 @@ oVirt maintains multiple Ansible roles that can be deployed to easily configure 
 Currently we have implemented following Ansible roles:
 
 * [oVirt.cluster-upgrade]
+* [oVirt.disaster-recovery]
+* [oVirt.engine-setup]
 * [oVirt.infra]
 * [oVirt.image-template]
 * [oVirt.manageiq]
+* [oVirt.repositories]
 * [oVirt.vm-infra]
 
 ## Installing the oVirt Roles
@@ -152,3 +155,6 @@ After the ansible-playbook playbook completes you will have a new data center na
 [oVirt Deployment Options]: https://www.ovirt.org/download/
 [Galaxy]: https://galaxy.ansible.com/
 [oVirt organization]: https://galaxy.ansible.com/oVirt/
+[oVirt.disaster-recovery]: https://github.com/oVirt/ovirt-ansible-disaster-recovery/blob/master/README.md
+[oVirt.engine-setup]: https://github.com/oVirt/ovirt-ansible-engine-setup/blob/master/README.md
+[oVirt.repositories]: https://github.com/oVirt/ovirt-ansible-repositories/blob/master/README.md
