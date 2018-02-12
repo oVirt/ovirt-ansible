@@ -4,4 +4,5 @@ distros:
   - el7
 release_branches:
   master: ovirt-master
+  master: ovirt-4.2
   ovirt-ansible-1.0: ovirt-4.1
