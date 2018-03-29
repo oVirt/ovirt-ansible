@@ -14,6 +14,7 @@ Currently we have implemented following Ansible roles:
 * [oVirt.manageiq]
 * [oVirt.repositories]
 * [oVirt.vm-infra]
+* [oVirt.v2v-conversion-host]
 
 ## Installing the oVirt Roles
 
@@ -158,3 +159,4 @@ After the ansible-playbook playbook completes you will have a new data center na
 [oVirt.disaster-recovery]: https://github.com/oVirt/ovirt-ansible-disaster-recovery/blob/master/README.md
 [oVirt.engine-setup]: https://github.com/oVirt/ovirt-ansible-engine-setup/blob/master/README.md
 [oVirt.repositories]: https://github.com/oVirt/ovirt-ansible-repositories/blob/master/README.md
+[oVirt.v2v-conversion-host]: https://github.com/oVirt/ovirt-ansible-v2v-conversion-host/blob/master/README.md
