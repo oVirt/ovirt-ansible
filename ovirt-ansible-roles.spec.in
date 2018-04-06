@@ -8,7 +8,7 @@ Group:          Virtualization/Management
 BuildArch:      noarch
 Url:            http://www.ovirt.org
 
-Requires: ansible >= 2.4
+Requires: ansible >= 2.5
 Requires: ovirt-ansible-cluster-upgrade >= 1.1.0
 Requires: ovirt-ansible-disaster-recovery >= 0.1
 Requires: ovirt-ansible-engine-setup >= 1.1.0
