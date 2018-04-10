@@ -36,6 +36,10 @@ Collection of Ansible roles to ease the management and automation of the oVirt e
 %license LICENSE
 
 %changelog
+* Tue Apr 17 2018 Ondra Machacek <omachace@redhat.com> - 1.1.4-1
+- Require Ansible 2.5.
+- Add v2v-conversion-host role.
+
 * Wed Jan 17 2018 Ondra Machacek <omachace@redhat.com> - 1.1.3-1
 - Add requirment for new roles.
 
