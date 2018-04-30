@@ -101,6 +101,7 @@
 
 - block:
   - name: Wait for ManageIQ/CloudForms API
+    no_log: true
     uri:
       url: "https://{{  ovirt_vms | map(attribute='reported_devices') | first | map(attribute='ips') | first | map(attribute='address') | first }}/api/"
       validate_certs: no
@@ -112,6 +113,7 @@
     delay: 20
 
   - name: Add oVirt/RHV provider to ManageIQ/CloudForms
+    no_log: true
     uri:
       url: "https://{{  ovirt_vms | map(attribute='reported_devices') | first | map(attribute='ips') | first | map(attribute='address') | first }}/api/providers"
       validate_certs: no
