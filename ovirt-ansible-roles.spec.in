@@ -42,6 +42,9 @@ make %{make_common_opts} install DESTDIR="%{buildroot}" ANSIBLE_DATA_DIR="%{_dat
 %license %{_docdir}/%{name}/LICENSE
 
 %changelog
+* Wed May 2 2018 Ondra Machacek <omachace@redhat.com> - 1.0.6-1
+- Support env variable for all roles.
+
 * Tue May 1 2018 Ondra Machacek <omachace@redhat.com> - 1.0.5-1
 - Use no_log: true in ovirt-manageiq role.
 
