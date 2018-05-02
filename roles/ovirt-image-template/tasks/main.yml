@@ -24,9 +24,9 @@
 - block:
   - name: Login to oVirt
     ovirt_auth:
-      url: "{{ engine_url }}"
-      username: "{{ engine_user }}"
-      password: "{{ engine_password }}"
+      url: "{{ engine_url | default(omit) }}"
+      username: "{{ engine_user | default(omit) }}"
+      password: "{{ engine_password | default(omit) }}"
       ca_file: "{{ engine_cafile | default(omit) }}"
       insecure: "{{ engine_insecure | default(true) }}"
     when: ovirt_auth is undefined
