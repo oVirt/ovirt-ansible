@@ -24,3 +24,4 @@ dependencies:
  - oVirt.repositories
  - oVirt.vm-infra
  - oVirt.v2v-conversion-host
+ - oVirt.shutdown-env
