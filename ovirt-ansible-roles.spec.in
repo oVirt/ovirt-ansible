@@ -8,15 +8,15 @@ Group:          Virtualization/Management
 BuildArch:      noarch
 Url:            http://www.ovirt.org
 
-Requires: ansible >= 2.5
-Requires: ovirt-ansible-cluster-upgrade >= 1.1.0
+Requires: ansible >= 2.7.2
+Requires: ovirt-ansible-cluster-upgrade >= 1.1.9
 Requires: ovirt-ansible-disaster-recovery >= 0.1
-Requires: ovirt-ansible-engine-setup >= 1.1.0
-Requires: ovirt-ansible-image-template >= 1.1.0
-Requires: ovirt-ansible-infra >= 1.1.0
-Requires: ovirt-ansible-manageiq >= 1.1.0
-Requires: ovirt-ansible-repositories >= 1.1.0
-Requires: ovirt-ansible-vm-infra >= 1.1.0
+Requires: ovirt-ansible-engine-setup >= 1.1.6
+Requires: ovirt-ansible-image-template >= 1.1.9
+Requires: ovirt-ansible-infra >= 1.1.10
+Requires: ovirt-ansible-manageiq >= 1.1.13
+Requires: ovirt-ansible-repositories >= 1.1.3
+Requires: ovirt-ansible-vm-infra >= 1.1.12
 Requires: ovirt-ansible-v2v-conversion-host >= 1.0.0
 Requires: ovirt-ansible-hosted-engine-setup >= 1.0.0
 Requires: ovirt-ansible-shutdown-env >= 1.0.0
