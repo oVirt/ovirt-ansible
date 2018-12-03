@@ -38,6 +38,9 @@ Collection of Ansible roles to ease the management and automation of the oVirt e
 %license LICENSE
 
 %changelog
+* Mon Dec 3 2018 Ondra Machacek <omachace@redhat.com> - 1.1.6-1
+- Require Ansible 2.7.2.
+
 * Thu Oct 4 2018 Ondra Machacek <omachace@redhat.com> - 1.1.5-1
 - Add hosted-engine role.
 - Add shutdown-env role.
