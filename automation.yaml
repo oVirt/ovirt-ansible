@@ -1,7 +1,5 @@
 distros:
-  - fc27
   - fc28
   - el7
 release_branches:
   master: [ "ovirt-master", "ovirt-4.2" ]
-  ovirt-ansible-1.0: ovirt-4.1
