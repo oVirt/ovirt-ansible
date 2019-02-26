@@ -89,11 +89,11 @@ $ ansible-vault encrypt passwords.yml
 New Vault password:
 Confirm New Vault password:
 ```
-3) Create a file that contains engine details such as the url, certificate, and user.
+3) Create a file that contains engine details such as the hostname, certificate, and user.
 ```
 $ cat engine_vars.yml
 ---
-engine_url: https://example.engine.redhat.com/ovirt-engine/api
+engine_fqdn: example.engine.redhat.com
 engine_user: admin@internal
 engine_cafile: /etc/pki/ovirt-engine/ca.pem
 ```
@@ -117,7 +117,7 @@ $ cat ovirt_infra.yml
   pre_tasks:
     - name: Login to oVirt
       ovirt_auth:
-        url: "{{ engine_url }}"
+        hostname: "{{ engine_fqdn }}"
         username: "{{ engine_user }}"
         password: "{{ engine_password }}"
         ca_file: "{{ engine_cafile | default(omit) }}"

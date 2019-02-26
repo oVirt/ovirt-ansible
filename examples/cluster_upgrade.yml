@@ -9,7 +9,7 @@
     - passwords.yml
 
   vars:
-    engine_url: https://ovirt.example.com/ovirt-engine/api
+    engine_fqdn: ovirt.example.com
     engine_user: admin@internal
 
     stop_non_migratable_vms: true
