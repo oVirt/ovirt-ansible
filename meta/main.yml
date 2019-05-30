@@ -24,5 +24,5 @@ dependencies:
  - ovirt.repositories
  - ovirt.vm-infra
  - ovirt.v2v-conversion-host
- - ovirt.hosted-engine-setup
+ - ovirt.hosted_engine_setup
  - ovirt.shutdown-env
