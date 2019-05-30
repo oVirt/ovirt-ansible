@@ -15,14 +15,14 @@ galaxy_info:
   galaxy_tags: [ovirt, rhv, rhev, virtualization]
 
 dependencies:
- - oVirt.cluster-upgrade
- - oVirt.disaster-recovery
- - oVirt.engine-setup
- - oVirt.image-template
- - oVirt.infra
- - oVirt.manageiq
- - oVirt.repositories
- - oVirt.vm-infra
- - oVirt.v2v-conversion-host
- - oVirt.hosted-engine-setup
- - oVirt.shutdown-env
+ - ovirt.cluster-upgrade
+ - ovirt.disaster-recovery
+ - ovirt.engine-setup
+ - ovirt.image-template
+ - ovirt.infra
+ - ovirt.manageiq
+ - ovirt.repositories
+ - ovirt.vm-infra
+ - ovirt.v2v-conversion-host
+ - ovirt.hosted-engine-setup
+ - ovirt.shutdown-env
