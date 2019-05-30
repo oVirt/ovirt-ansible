@@ -38,6 +38,9 @@ Collection of Ansible roles to ease the management and automation of the oVirt e
 %license LICENSE
 
 %changelog
+* Thu May 30 2019 Ondra Machacek <omachace@redhat.com> - 1.1.7-1
+- Fix ansible galaxy dependencies names.
+
 * Mon Dec 3 2018 Ondra Machacek <omachace@redhat.com> - 1.1.6-1
 - Require Ansible 2.7.2.
 

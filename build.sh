@@ -1,8 +1,8 @@
 #!/bin/bash
 
 VERSION="1.1.7"
-MILESTONE=master
-RPM_RELEASE="0.1.$MILESTONE.$(date -u +%Y%m%d%H%M%S)"
+MILESTONE=
+RPM_RELEASE="1"
 
 ROLE_NAME="ovirt.ansible-roles"
 PACKAGE_NAME="ovirt-ansible-roles"
