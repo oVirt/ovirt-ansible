@@ -25,4 +25,4 @@ dependencies:
  - ovirt.vm-infra
  - ovirt.v2v-conversion-host
  - ovirt.hosted_engine_setup
- - ovirt.shutdown-env
+ - ovirt.shutdown_env
