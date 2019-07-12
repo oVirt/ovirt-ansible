@@ -17,7 +17,7 @@ Requires: ovirt-ansible-infra >= 1.1.10
 Requires: ovirt-ansible-manageiq >= 1.1.13
 Requires: ovirt-ansible-repositories >= 1.1.3
 Requires: ovirt-ansible-vm-infra >= 1.1.12
-Requires: ovirt-ansible-v2v-conversion-host >= 1.0.0
+Requires: v2v-conversion-host-ansible >= 1.0.0
 Requires: ovirt-ansible-hosted-engine-setup >= 1.0.0
 Requires: ovirt-ansible-shutdown-env >= 1.0.0
 
