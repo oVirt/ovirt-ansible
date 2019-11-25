@@ -1,4 +1,5 @@
 distros:
+  - fc30
   - el7
 release_branches:
-  ovirt-ansible-1.1: [ "ovirt-4.3", "ovirt-4.2" ]
+  master: [ "ovirt-master" ]
