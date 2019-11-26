@@ -38,6 +38,9 @@ Collection of Ansible roles to ease the management and automation of the oVirt e
 %license LICENSE
 
 %changelog
+* Mon Nov 25 2019 Martin Necas <mnecas@redhat.com> - 1.2.0-1
+- Bump ansible to version 2.9.0.
+
 * Thu May 30 2019 Ondra Machacek <omachace@redhat.com> - 1.1.7-1
 - Fix ansible galaxy dependencies names.
 
