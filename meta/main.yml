@@ -15,14 +15,28 @@ galaxy_info:
   galaxy_tags: [ovirt, rhv, rhev, virtualization]
 
 dependencies:
- - ovirt.cluster-upgrade
- - ovirt.disaster-recovery
- - ovirt.engine-setup
- - ovirt.image-template
- - ovirt.infra
- - ovirt.manageiq
- - ovirt.repositories
- - ovirt.vm-infra
- - ovirt.v2v-conversion-host
- - ovirt.hosted_engine_setup
- - ovirt.shutdown_env
+ - src: https://github.com/ovirt/ovirt-ansible-vm-infra
+   version: ovirt-ansible-vm-infra-1.1
+   name: ovirt.vm-infra
+ - src: https://github.com/ovirt/ovirt-ansible-infra
+   version: ovirt-ansible-infra-1.1
+   name: ovirt.infra
+ - src: https://github.com/ovirt/ovirt-ansible-cluster-upgrade
+   version: ovirt-ansible-cluster-upgrade-1.1
+   name: ovirt.cluster-upgrade
+ - src: https://github.com/ovirt/ovirt-ansible-engine-setup
+   version: ovirt-ansible-engine-setup-1.1
+   name: ovirt.engine-setup
+ - src: https://github.com/ovirt/ovirt-ansible-repositories
+   version: ovirt-ansible-repositories-1.1
+   name: ovirt.repositories
+ - src: https://github.com/ovirt/ovirt-ansible-manageiq
+   version: ovirt-ansible-manageiq-1.1
+   name: ovirt.manageiq
+ - src: https://github.com/ovirt/ovirt-ansible-image-template
+   version: ovirt-ansible-image-template-1.1
+   name: ovirt.image-template
+ - src: ovirt.disaster-recovery
+ - src: ovirt.v2v-conversion-host
+ - src: ovirt.hosted_engine_setup
+ - src: ovirt.shutdown_env
