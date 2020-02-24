@@ -10,7 +10,7 @@ Url:            http://www.ovirt.org
 
 Requires: ansible >= 2.9.0
 Requires: ovirt-ansible-cluster-upgrade >= 1.2.0
-Requires: ovirt-ansible-disaster-recovery >= 0.1
+Requires: ovirt-ansible-disaster-recovery >= 1.3.0
 Requires: ovirt-ansible-engine-setup >= 1.2.0
 Requires: ovirt-ansible-image-template >= 1.2.0
 Requires: ovirt-ansible-infra >= 1.2.0
